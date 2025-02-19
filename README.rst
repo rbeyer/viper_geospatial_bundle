@@ -21,4 +21,4 @@ And then "make install" should create a bundle/ directory with files ready to be
 Getting Started
 ---------------
 
-You will need to have `vipersci <https://github.com/NeoGeographyToolkit/vipersci>` installed.  As well as having the `PDS4 Validate Tool <https://nasa-pds.github.io/validate/>` available in the environment as "validate".
+You will need to have `vipersci <https://github.com/NeoGeographyToolkit/vipersci>_` installed.  As well as having the `PDS4 Validate Tool <https://nasa-pds.github.io/validate/>_` available in the environment as "validate".
