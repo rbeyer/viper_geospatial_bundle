@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1N00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1N00_1510.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1N00_1970.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:pds="http://pds.nasa.gov/pds4/pds/v1" xmlns:disp="http://pds.nasa.gov/pds4/disp/v1" xmlns:cart="http://pds.nasa.gov/pds4/cart/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+    http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1N00.xsd
+    http://pds.nasa.gov/pds4/disp/v1 https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1N00_1510.xsd
+    http://pds.nasa.gov/pds4/cart/v1 https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1N00_1970.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:nasa:pds:viper_geospatial:data_derived:viper_sfs_dem</logical_identifier>
+    <version_id>99.99</version_id>
+    <title>VIPER Shape from Shading (SfS) Digital Elevation Model (DEM)</title>
+    <information_model_version>1.23.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+    <Modification_History>
+      <Modification_Detail>
+        <modification_date>2025-02-10</modification_date>
+        <version_id>99.99</version_id>
+      <description>Dumb information model forces this to be a 'valid' version instead of 0.1 for testing, which should be allowed.</description>
+      </Modification_Detail>
+    </Modification_History>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time xsi:nil="true" nilReason="inapplicable" />
+      <stop_date_time xsi:nil="true" nilReason="inapplicable" />
+      </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose>Science</purpose>
+      <processing_level>Derived</processing_level>
+      <description>
+        Shape from Shading Digital Elevation Model as a GeoTIFF with 32-bit pixels indicating the elevation with respect to the lunar radius of 1,737,400 m at 1 m/pixel.  In areas not illuminated in any of the source LROC NAC images, one of two things were done. If the area was small, the pixels were filled by interpolating the SfS data.  If the area was larger, then the area was filled with improved LOLA data, and a smooth blend from SfS to LOLA was applied.
+      </description>
+    </Primary_Result_Summary>
+    <Investigation_Area>
+      <name>VIPER</name>
+      <type>Mission</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:viper</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>Lunar Reconnaissance Orbiter Camera</name>
+        <type>Instrument</type>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Lunar Orbiter Laser Altimeter</name>
+        <type>Instrument</type>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>Moon</name>
+      <type>Satellite</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:target:satellite.earth.moon</lid_reference>
+        <reference_type>data_to_target</reference_type>
+      </Internal_Reference>
+    </Target_Identification>
+    <Discipline_Area>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>image</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Top to Bottom</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <cart:Cartography>
+        <Local_Internal_Reference>
+          <local_identifier_reference>image</local_identifier_reference>
+          <local_reference_type>cartography_parameters_to_image_object</local_reference_type>
+        </Local_Internal_Reference>
+        <cart:Spatial_Domain>
+          <cart:Bounding_Coordinates>
+            <cart:west_bounding_coordinate unit="deg">27.6932315518034642</cart:west_bounding_coordinate>
+            <cart:east_bounding_coordinate unit="deg">33.7278089134552843</cart:east_bounding_coordinate>
+            <cart:north_bounding_coordinate unit="deg">-85.1391556303045576</cart:north_bounding_coordinate>
+            <cart:south_bounding_coordinate unit="deg">-85.5088944835956255</cart:south_bounding_coordinate>
+          </cart:Bounding_Coordinates>
+        </cart:Spatial_Domain>
+        <cart:Spatial_Reference_Information>
+          <cart:Horizontal_Coordinate_System_Definition>
+            <cart:Planar>
+              <cart:Map_Projection>
+                <cart:map_projection_name>Stereographic</cart:map_projection_name>
+                <cart:Stereographic>
+                  <cart:longitude_of_central_meridian unit="deg">31.6218</cart:longitude_of_central_meridian>
+                  <cart:latitude_of_projection_origin unit="deg">-85.42088</cart:latitude_of_projection_origin>
+                  <cart:scale_factor_at_projection_origin>1</cart:scale_factor_at_projection_origin>
+                </cart:Stereographic>
+              </cart:Map_Projection>
+              <cart:Planar_Coordinate_Information>
+                <cart:planar_coordinate_encoding_method>Coordinate Pair</cart:planar_coordinate_encoding_method>
+                <cart:Coordinate_Representation>
+                  <cart:pixel_resolution_x unit="m/pixel">1</cart:pixel_resolution_x>
+                  <cart:pixel_resolution_y unit="m/pixel">1</cart:pixel_resolution_y>
+                  <cart:pixel_scale_x unit="pixel/deg">30323.3504241494811</cart:pixel_scale_x>
+                  <cart:pixel_scale_y unit="pixel/deg">30323.3504241494811</cart:pixel_scale_y>
+                </cart:Coordinate_Representation>
+              </cart:Planar_Coordinate_Information>
+              <cart:Geo_Transformation>
+                <cart:upperleft_corner_x unit="m">-9336.5</cart:upperleft_corner_x>
+                <cart:upperleft_corner_y unit="m">8247.5</cart:upperleft_corner_y>
+              </cart:Geo_Transformation>
+            </cart:Planar>
+            <cart:Geodetic_Model>
+              <cart:latitude_type>Planetocentric</cart:latitude_type>
+              <cart:spheroid_name>Moon (2015) - Sphere</cart:spheroid_name>
+              <cart:a_axis_radius unit="m">1737400</cart:a_axis_radius>
+              <cart:b_axis_radius unit="m">1737400</cart:b_axis_radius>
+              <cart:c_axis_radius unit="m">1737400</cart:c_axis_radius>
+              <cart:longitude_direction>Positive East</cart:longitude_direction>
+            </cart:Geodetic_Model>
+          </cart:Horizontal_Coordinate_System_Definition>
+        </cart:Spatial_Reference_Information>
+      </cart:Cartography>
+    </Discipline_Area>
+  </Observation_Area>
+  <Reference_List>
+    <External_Reference>
+      <doi>10.3847/PSJ/??????</doi>
+      <reference_text>Beyer et al. (to be submitted), VIPER Site Analysis, PSJ</reference_text>
+      <description>This paper provides a detailed description of the methods and process used to produce this SfS DEM.</description>
+    </External_Reference>
+    <External_Reference>
+      <doi>10.1016/j.pss.2020.105119</doi>
+      <reference_text>Barker, M.K., et al. (2021), Improved LOLA Elevation Maps for South Pole Landing Sites: Error Estimates and Their Impact on Illumination Conditions, Planetary and Space Science, Volume 203, 1 September 2021, 105119,  doi:10.1016/j.pss.2020.105119.</reference_text>
+      <description>This paper provides a detailed description of the methods used to produce the improved LOLA terrain models in the Source_Product_External LOLA:Barker:78.</description>
+    </External_Reference>
+    <Source_Product_External>
+      <external_source_product_identifier>LOLA:Barker:78</external_source_product_identifier>
+      <reference_type>data_to_derived_source_product</reference_type>
+      <curating_facility>Goddard Space Flight Center</curating_facility>
+      <description>This external product is a web page (https://pgda.gsfc.nasa.gov/products/78) that contains improved LOLA digital elevation models (DEMs) of several regions surrounding high-priority lunar south pole landing sites using exclusively laser altimetry data acquired by LRO-LOLA. The data there used to build this product is designated as "Site2-v2: Leibnitz beta plateau, extended boundaries" on that GSFC site.</description>
+    </Source_Product_External>
+  </Reference_List>
+  <File_Area_Observational>
+    <File>
+      <file_name>viper_sfs_dem.tif</file_name>
+    </File>
+    <Header>
+      <offset unit="byte">0</offset>
+      <object_length unit="byte">66678</object_length>
+      <parsing_standard_id>TIFF 6.0</parsing_standard_id>
+      <description>TIFF/GeoTIFF header. The TIFF/GeoTIFF format is used throughout the geospatial and science communities to share geographic image data. </description>
+    </Header>
+    <Array_3D_Image>
+      <local_identifier>image</local_identifier>
+      <offset unit="byte">66678</offset>
+      <axes>3</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <Element_Array>
+        <data_type>IEEE754LSBSingle</data_type>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Band</axis_name>
+        <elements>1</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>11008</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>14336</elements>
+        <sequence_number>3</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <missing_constant>-3.4028234663852886e+38</missing_constant>
+      </Special_Constants>
+    </Array_3D_Image>
+    </File_Area_Observational>
+  <File_Area_Observational_Supplemental>
+    <File>
+      <file_name>viper_sfs_images.csv</file_name>
+      <local_identifier>source_product_lids</local_identifier>
+      <creation_date_time>2025-02-12T17:48:00Z</creation_date_time>
+    </File>
+    <Table_Delimited_Source_Product_Internal>
+      <name>LROC NAC Source LIDVIDs</name>
+      <offset unit="byte">0</offset>
+      <parsing_standard_id>PDS DSV 1</parsing_standard_id>
+      <description>This table is a list of the product lidvids of all LROC NAC products used to create this terrain model.</description>
+      <records>420</records>
+      <record_delimiter>Line-Feed</record_delimiter>
+      <field_delimiter>Comma</field_delimiter>
+      <Record_Delimited>
+        <fields>2</fields>
+        <groups>0</groups>
+        <Field_Delimited>
+          <name>Reference Type</name>
+          <field_number>1</field_number>
+          <data_type>ASCII_String</data_type>
+          <maximum_field_length unit="byte">255</maximum_field_length>
+          <description>This column specifies the reference_type of the source product.</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>LIDVID_LID</name>
+          <field_number>2</field_number>
+          <data_type>ASCII_LIDVID_LID</data_type>
+          <maximum_field_length unit="byte">255</maximum_field_length>
+          <description>LROC NAC LIDVID</description>
+        </Field_Delimited>
+      </Record_Delimited>
+      <reference_type>table_has_source_products</reference_type>
+    </Table_Delimited_Source_Product_Internal>
+  </File_Area_Observational_Supplemental>
+</Product_Observational>
