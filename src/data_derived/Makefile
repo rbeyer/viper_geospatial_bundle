@@ -1,6 +1,6 @@
 # make sure to have done "conda activate vipersci"
 
-VALIDATE = /Users/rbeyer/opt/validate-3.4.1/bin/validate
+VALIDATE = validate
 CATALOG = ../catalog23.xml
 DIRS = depth_to_ice lroc_orthoimages persistently_shadowed_regions sfs_terrain temperature_max
 
