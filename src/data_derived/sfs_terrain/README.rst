@@ -3,6 +3,8 @@ VIPER Geospatial data_derived/sfs_terrain
 
 The creation of PDS4 XML labels in this directory generally begins with a `gdal_translate` (see Makefile), and then a manual editing.
 
+For later products, I would still run the Makefile `gdal_translate` target, but I would then copy an XML label for a product that I had already worked (which was most similar in process or refernece list, etc.), and then ensure that the numerical elements from the GDAL-produced label were copied over into the new label as I manually edited it.
+
 
 viper_sfs_images.csv
 --------------------
