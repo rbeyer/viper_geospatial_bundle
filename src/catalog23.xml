@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
-	<!-- The attribute xml:base in the following group element may need to be tailored. -->
-	<group xml:base="file:///Users/rbeyer/opt/pds/im23/">
-		<uri name="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1N00.xsd" uri="PDS4_PDS_1N00.xsd"/>
-		<uri name="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1N00.sch" uri="PDS4_PDS_1N00.sch"/>
-		<uri name="https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1N00_1510.xsd" uri="PDS4_DISP_1N00_1510.xsd"/>
-		<uri name="https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1N00_1510.sch" uri="PDS4_DISP_1N00_1510.sch"/>
-		<uri name="https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1N00_1970.xsd" uri="PDS4_CART_1N00_1970.xsd"/>
-		<uri name="https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1N00_1970.sch" uri="PDS4_CART_1N00_1970.sch"/>
-	</group>
+ <!-- The attribute xml:base in the following group element may need to be tailored. -->
+ <group xml:base="file:///Users/rbeyer/opt/pds/im23/">
+  <uri name="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1N00.xsd" uri="PDS4_PDS_1N00.xsd"/>
+  <uri name="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1N00.sch" uri="PDS4_PDS_1N00.sch"/>
+  <uri name="https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1N00_1510.xsd" uri="PDS4_DISP_1N00_1510.xsd"/>
+  <uri name="https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1N00_1510.sch" uri="PDS4_DISP_1N00_1510.sch"/>
+  <uri name="https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1N00_1970.xsd" uri="PDS4_CART_1N00_1970.xsd"/>
+  <uri name="https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1N00_1970.sch" uri="PDS4_CART_1N00_1970.sch"/>
+  <uri name="https://pds.nasa.gov/pds4/proc/v1/PDS4_PROC_1N00_1300.xsd" uri="PDS4_PROC_1N00_1300.xsd"/>
+  <uri name="https://pds.nasa.gov/pds4/proc/v1/PDS4_PROC_1N00_1300.sch" uri="PDS4_PROC_1N00_1300.sch"/>
+ </group>
 </catalog>
