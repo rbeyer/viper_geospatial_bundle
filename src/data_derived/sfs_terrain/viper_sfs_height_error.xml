@@ -134,7 +134,9 @@
               <proc:software_availability>Open source</proc:software_availability>
               <proc:software_type>C++</proc:software_type>
               <proc:Software_Program>
-                <proc:name>sfs</proc:name>
+              <proc:name>sfs</proc:name>
+                <proc:description>The ASP program is run again, this time with the --estimate-height-errors option to produce the height error map.  The parameters listed here are not complete, but are the relevant parameters to sfs for this computation.
+                </proc:description>
                 <proc:Software_Program_Parameters>
                   <proc:Parameter>
                     <proc:name>--estimate-height-errors</proc:name>
@@ -216,40 +218,5 @@
         <missing_constant>-1</missing_constant>
       </Special_Constants>
     </Array_3D_Image>
-    </File_Area_Observational>
-  <File_Area_Observational_Supplemental>
-    <File>
-      <file_name>viper_sfs_images.csv</file_name>
-      <local_identifier>source_product_lids</local_identifier>
-      <creation_date_time>2025-02-12T17:48:00Z</creation_date_time>
-    </File>
-    <Table_Delimited_Source_Product_Internal>
-      <name>LROC NAC Source LIDVIDs</name>
-      <offset unit="byte">0</offset>
-      <parsing_standard_id>PDS DSV 1</parsing_standard_id>
-      <description>This table is a list of the product lidvids of all LROC NAC products used to create this height estimate.</description>
-      <records>420</records>
-      <record_delimiter>Line-Feed</record_delimiter>
-      <field_delimiter>Comma</field_delimiter>
-      <Record_Delimited>
-        <fields>2</fields>
-        <groups>0</groups>
-        <Field_Delimited>
-          <name>Reference Type</name>
-          <field_number>1</field_number>
-          <data_type>ASCII_String</data_type>
-          <maximum_field_length unit="byte">255</maximum_field_length>
-          <description>This column specifies the reference_type of the source product.</description>
-        </Field_Delimited>
-        <Field_Delimited>
-          <name>LIDVID_LID</name>
-          <field_number>2</field_number>
-          <data_type>ASCII_LIDVID_LID</data_type>
-          <maximum_field_length unit="byte">255</maximum_field_length>
-          <description>LROC NAC LIDVID</description>
-        </Field_Delimited>
-      </Record_Delimited>
-      <reference_type>table_has_source_products</reference_type>
-    </Table_Delimited_Source_Product_Internal>
-  </File_Area_Observational_Supplemental>
+  </File_Area_Observational>
 </Product_Observational>
