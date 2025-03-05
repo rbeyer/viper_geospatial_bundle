@@ -1,0 +1,74 @@
+
+lid: "urn:nasa:pds:viper_geospatial:data_derived:viper_sfs_height_error"
+title: "VIPER Shape from Shading (SfS) Digital Elevation Model (DEM) Height Error Map" 
+description: >-
+  A height uncertainty product derived from creating simulated
+  images by taking the SfS DEM and illuminating it in a manner
+  similar to each source image.  This height-error map has the
+  maximum height perturbation at each pixel, in meters, which will
+  make at least one of the simulated images at that pixel change
+  by more than twice the discrepancy between the unperturbed simulated
+  image and the measured image.  This is an ad-hoc relative measure
+  which is larger where the SfS DEM is less accurate.  This is a
+  32-bit GeoTIFF.  Areas that were not illuminated by any source
+  image have their pixels set to the no-data value.
+modification_details: 
+- version: 999.1
+  date: 2025-03-05
+  description: >-
+    Dumb information model forces this to be a 'valid' version
+    instead of 0.1 for testing, which should be allowed.  This is
+    the first draft.  All version 999 modifications will be removed
+    before PDS release 1.0.
+obs_system_components:
+ - name: Lunar Reconnaissance Orbiter Camera
+   type: Instrument
+proc_name: Estimate SfS Height Errors
+proc_desc: >-
+  This is the processing step that takes as input the SfS terrain
+  and the LROC images to produce this height estimate.
+proc_owner: Oleg Alexandrov and Ross Beyer
+proc_inst: NASA Ames Research Center
+proc_sw: NASA Ames Stereo Pipeline
+proc_sw_version: 3.2.0
+proc_sw_avail: Open source
+proc_sw_type: C++
+
+software_programs:
+- name: sfs
+  desc: >-
+    The ASP program is run again, this time with the
+    --estimate-height-errors option to produce the height error
+    map.  The parameters listed here are not complete, but are the
+    relevant parameters to sfs for this computation.
+  params:
+  - name: --estimate-height-errors
+    type: Input
+    value: None, this option is a flag only.
+  - name: --input-dem
+    type: Input
+    value: viper_sfs_dem.tif
+
+
+external_reference:
+- doi: 10.3847/PSJ/??????
+  ref_text: Beyer et al. (to be submitted), VIPER Site Analysis, PSJ
+  desc: This paper provides a description of the methods and process used to produce this SfS DEM.
+- doi: 10.1029/2018EA000409
+  ref_text: >-
+    Beyer, Ross A., Oleg Alexandrov, and Scott McMichael. 2018.
+    The Ames Stereo Pipeline: NASA’s open source software for
+    deriving and processing terrain data. Earth and Space Science,
+    5.
+  desc: This paper provides a description of the NASA ASP software.
+- doi: 10.1029/2018EA000390
+  ref_text: >-
+    Alexandrov, O. and Beyer, R. A. (2018). Multiview shape-from-shading for planetary images. Earth and Space Science, 5, 652–666.
+  desc: This paper provides a description of the SfS process in NASA ASP.
+- doi: 10.5281/zenodo.7497499
+  ref_text: "Oleg Alexandrov, et al. (2023). NeoGeographyToolkit/StereoPipeline: ASP 3.2.0 (3.2.0). Zenodo."
+  desc: This is the DOI for the version of the NASA ASP software used to produce this product.
+
+source_product_external: []
+
+file_area_obs_supplemental: False

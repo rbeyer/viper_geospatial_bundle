@@ -30,6 +30,7 @@ proc_sw_type: C++
 
 software_programs:
 - name: dem_mosaic
+  desc: False
   params:
   - name: --count
     type: Input

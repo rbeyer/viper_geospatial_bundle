@@ -36,8 +36,10 @@ proc_sw_type: C++
 
 software_programs:
 - name: sfs
+  desc: False
   params: False
 - name: sfs_blend
+  desc: False
   params:
   - name: --image-threshold
     type: Input

@@ -21,10 +21,16 @@ COUNTYML = $(addsuffix .yml, $(notdir $(basename $(COUNTLBL))))
 COUNTTIFF = $(addsuffix .tif, $(notdir $(basename $(COUNTLBL))))
 
 HEIGHTE = /Users/rbeyer/projects/viper/viper-maps/sfs/viper_sfs_height_error.tif
+HEIGHTEGDAL = $(addsuffix _gdal.xml, $(notdir $(basename $(HEIGHTE))))
 HEIGHTELBL = $(addsuffix .xml, $(notdir $(basename $(HEIGHTE))))
+HEIGHTEYML = $(addsuffix .yml, $(notdir $(basename $(HEIGHTELBL))))
+HEIGHTETIFF = $(addsuffix .tif, $(notdir $(basename $(HEIGHTELBL))))
 
-LABELS = $(SFSLBL) $(COUNTLBL)
-TOCLEAN = $(SFSGDAL) $(SFSTIFF) $(COUNTGDAL) $(COUNTTIFF)
+LABELS = $(SFSLBL) $(COUNTLBL) $(HEIGHTELBL)
+TOCLEAN = $(SFSGDAL) $(SFSTIFF) \
+	  $(COUNTGDAL) $(COUNTTIFF) \
+	  $(HEIGHTEGDAL) $(HEIGHTETIFF) \
+
 CREATIONOPTS = -co IMAGE_FORMAT=GEOTIFF
 
 .PHONY: all sfs-dem validate
@@ -33,7 +39,7 @@ all:
 	echo No overall target, review Makefile.
 
 sfs-dem:
-	gdal_translate -of PDS4 $(SFS) -co IMAGE_FORMAT=GEOTIFF $(SFSGDAL)
+	gdal_translate -of PDS4 $(SFS) $(CREATIONOPTS) $(SFSGDAL)
 	$(MAP_LABEL) -t map_template.xml -o $(SFSLBL) -c viper_sfs_images.csv -y $(SFSYML) $(SFSGDAL)
 
 sfs-count:
@@ -41,7 +47,8 @@ sfs-count:
 	$(MAP_LABEL) -t map_template.xml -o $(COUNTLBL) -c viper_ortho_images.csv -y $(COUNTYML) $(COUNTGDAL)
 
 sfs-heighte:
-	gdal_translate -of PDS4 $(HEIGHTE) $(CREATIONOPTS) $(HEIGHTELBL)
+	gdal_translate -of PDS4 $(HEIGHTE) $(CREATIONOPTS) $(HEIGHTEGDAL)
+	$(MAP_LABEL) -t map_template.xml -o $(HEIGHTELBL) -y $(HEIGHTEYML) $(HEIGHTEGDAL)
 
 
 validate:

@@ -140,6 +140,7 @@
             <proc:software_type>${proc_sw_type}</proc:software_type>
             <proc:Software_Program py:for="prog in software_programs">
               <proc:name>${prog.name}</proc:name>
+              <proc:description py:if="prog.desc">${prog.desc}</proc:description>
               <proc:Software_Program_Parameters py:if="prog.params">
                 <proc:Parameter py:for="param in prog.params">
                   <proc:name>${param.name}</proc:name>
