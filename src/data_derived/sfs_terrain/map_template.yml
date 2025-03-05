@@ -1,0 +1,58 @@
+# This is a generic-ish YAML file meant to be operated on by map_label.py
+#
+lid: "urn:nasa:pds:viper_geospatial:lroc_orthoimages:test"
+title: "VIPER Shape from Shading (SfS) something" 
+description: "Enter description of the product here."
+modification_details: 
+- version: 999.1
+  date: "2025-03-05"
+  description: >-
+    Dumb information model forces this to be a 'valid' version
+    instead of 0.1 for testing, which should be allowed.  This is
+    the first draft.  All version 999 modifications will be removed
+    before PDS release 1.0.
+
+obs_system_components:
+ - name: Lunar Reconnaissance Orbiter Camera
+   type: Instrument
+
+proc_name: process name
+proc_desc: process description
+proc_owner: Oleg Alexandrov and Ross Beyer
+proc_inst: NASA Ames Research Center
+proc_sw: NASA Ames Stereo Pipeline
+proc_sw_version: 3.2.0
+proc_sw_avail: Open source
+proc_sw_type: C++
+
+software_programs:
+- name: sfs
+  desc: False  # or a string
+  params:  # or params: []
+  - name: "--param"
+    type: "Input"
+    value: "value"
+
+external_reference:
+- doi: "10."
+  ref_text: "Beyer et al."
+  desc: "This paper ..."
+
+source_product_external:  # or source_product_external: []
+- id: LOLA:Barker:78
+  type: data_to_derived_source_product
+  curating_facility: Goddard Space Flight Center
+  desc: >-
+    This external product is a web page
+    (https://pgda.gsfc.nasa.gov/products/78) that contains improved
+    LOLA digital elevation models (DEMs) of several regions surrounding
+    high-priority lunar south pole landing sites using exclusively
+    laser altimetry data acquired by LRO-LOLA. The data there used
+    to build this product is designated as "Site2-v2: Leibnitz beta
+    plateau, extended boundaries" on that GSFC site.
+
+file_area_obs_supplemental: False
+faos_file_name: some.csv
+faos_table_name: LROC table
+faos_table_desc: This table is a ...
+faos_lidvid_desc: LROC NAC LIDVID
