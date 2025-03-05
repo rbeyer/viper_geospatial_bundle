@@ -33,7 +33,7 @@
     <Time_Coordinates>
       <start_date_time xsi:nil="true" nilReason="inapplicable" />
       <stop_date_time xsi:nil="true" nilReason="inapplicable" />
-      </Time_Coordinates>
+    </Time_Coordinates>
     <Primary_Result_Summary>
       <purpose>Science</purpose>
       <processing_level>Derived</processing_level>
