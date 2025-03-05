@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1N00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1N00_1510.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1N00_1970.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/proc/v1/PDS4_PROC_1N00_1300.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Observational 
+  xmlns="http://pds.nasa.gov/pds4/pds/v1"
+  xmlns:py="http://genshi.edgewall.org/"
+  xmlns:disp="http://pds.nasa.gov/pds4/disp/v1"
+  xmlns:cart="http://pds.nasa.gov/pds4/cart/v1"
+  xmlns:proc="http://pds.nasa.gov/pds4/proc/v1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+    http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1N00.xsd
+    http://pds.nasa.gov/pds4/disp/v1 https://pds.nasa.gov/pds4/disp/v1/PDS4_DISP_1N00_1510.xsd
+    http://pds.nasa.gov/pds4/cart/v1 https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1N00_1970.xsd
+    http://pds.nasa.gov/pds4/proc/v1 https://pds.nasa.gov/pds4/proc/v1/PDS4_PROC_1N00_1300.xsd">
+  <Identification_Area>
+    <logical_identifier>${lid}</logical_identifier>
+    <version_id>${vid}</version_id>
+    <title>${title}</title>
+    <information_model_version>1.23.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+    <Modification_History>
+      <Modification_Detail py:for="detail in modification_details">
+        <modification_date>${detail.date}</modification_date>
+        <version_id>${detail.version}</version_id>
+        <description>${detail.description}</description>
+      </Modification_Detail>
+    </Modification_History>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time xsi:nil="true" nilReason="inapplicable" />
+      <stop_date_time xsi:nil="true" nilReason="inapplicable" />
+      </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose>Science</purpose>
+      <processing_level>Derived</processing_level>
+      <description>${description}</description>
+    </Primary_Result_Summary>
+    <Investigation_Area>
+      <name>VIPER</name>
+      <type>Mission</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:viper</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <Observing_System_Component py:for="comp in obs_system_components">
+        <name>${comp.name}</name>
+        <type>${comp.type}</type>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>Moon</name>
+      <type>Satellite</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:target:satellite.earth.moon</lid_reference>
+        <reference_type>data_to_target</reference_type>
+      </Internal_Reference>
+    </Target_Identification>
+    <Discipline_Area>
+      <disp:Display_Settings>
+        <Local_Internal_Reference>
+          <local_identifier_reference>image</local_identifier_reference>
+          <local_reference_type>display_settings_to_array</local_reference_type>
+        </Local_Internal_Reference>
+        <disp:Display_Direction>
+          <disp:horizontal_display_axis>Sample</disp:horizontal_display_axis>
+          <disp:horizontal_display_direction>Left to Right</disp:horizontal_display_direction>
+          <disp:vertical_display_axis>Line</disp:vertical_display_axis>
+          <disp:vertical_display_direction>Top to Bottom</disp:vertical_display_direction>
+        </disp:Display_Direction>
+      </disp:Display_Settings>
+      <cart:Cartography>
+        <Local_Internal_Reference>
+          <local_identifier_reference>image</local_identifier_reference>
+          <local_reference_type>cartography_parameters_to_image_object</local_reference_type>
+        </Local_Internal_Reference>
+        <cart:Spatial_Domain>
+          <cart:Bounding_Coordinates>
+            <cart:west_bounding_coordinate unit="deg">${west_bounding}</cart:west_bounding_coordinate>
+            <cart:east_bounding_coordinate unit="deg">${east_bounding}</cart:east_bounding_coordinate>
+            <cart:north_bounding_coordinate unit="deg">${north_bounding}</cart:north_bounding_coordinate>
+            <cart:south_bounding_coordinate unit="deg">${south_bounding}</cart:south_bounding_coordinate>
+          </cart:Bounding_Coordinates>
+        </cart:Spatial_Domain>
+        <cart:Spatial_Reference_Information>
+          <cart:Horizontal_Coordinate_System_Definition>
+            <cart:Planar>
+              <cart:Map_Projection>
+                <cart:map_projection_name>Stereographic</cart:map_projection_name>
+                <cart:Stereographic>
+                  <cart:longitude_of_central_meridian unit="deg">31.6218</cart:longitude_of_central_meridian>
+                  <cart:latitude_of_projection_origin unit="deg">-85.42088</cart:latitude_of_projection_origin>
+                  <cart:scale_factor_at_projection_origin>1</cart:scale_factor_at_projection_origin>
+                </cart:Stereographic>
+              </cart:Map_Projection>
+              <cart:Planar_Coordinate_Information>
+                <cart:planar_coordinate_encoding_method>Coordinate Pair</cart:planar_coordinate_encoding_method>
+                <cart:Coordinate_Representation>
+                  <cart:pixel_resolution_x unit="m/pixel">${pix_res}</cart:pixel_resolution_x>
+                  <cart:pixel_resolution_y unit="m/pixel">${pix_res}</cart:pixel_resolution_y>
+                  <cart:pixel_scale_x unit="pixel/deg">${pix_scale}</cart:pixel_scale_x>
+                  <cart:pixel_scale_y unit="pixel/deg">${pix_scale}</cart:pixel_scale_y>
+                </cart:Coordinate_Representation>
+              </cart:Planar_Coordinate_Information>
+              <cart:Geo_Transformation>
+                <cart:upperleft_corner_x unit="m">${ulx}</cart:upperleft_corner_x>
+                <cart:upperleft_corner_y unit="m">${uly}</cart:upperleft_corner_y>
+              </cart:Geo_Transformation>
+            </cart:Planar>
+            <cart:Geodetic_Model>
+              <cart:latitude_type>Planetocentric</cart:latitude_type>
+              <cart:spheroid_name>Moon (2015) - Sphere</cart:spheroid_name>
+              <cart:a_axis_radius unit="m">1737400</cart:a_axis_radius>
+              <cart:b_axis_radius unit="m">1737400</cart:b_axis_radius>
+              <cart:c_axis_radius unit="m">1737400</cart:c_axis_radius>
+              <cart:longitude_direction>Positive East</cart:longitude_direction>
+            </cart:Geodetic_Model>
+          </cart:Horizontal_Coordinate_System_Definition>
+        </cart:Spatial_Reference_Information>
+      </cart:Cartography>
+      <proc:Processing_Information>
+        <Local_Internal_Reference>
+          <local_identifier_reference>image</local_identifier_reference>
+          <local_reference_type>processing_information_to_data_object</local_reference_type>
+        </Local_Internal_Reference>
+        <proc:Process>
+          <proc:name>${proc_name}</proc:name>
+          <proc:description>${proc_desc}</proc:description>
+          <proc:process_owner_name>${proc_owner}</proc:process_owner_name>
+          <proc:process_owner_institution_name>${proc_inst}</proc:process_owner_institution_name>
+          <proc:Software>
+            <proc:name>${proc_sw}</proc:name>
+            <proc:software_version_id>${proc_sw_version}</proc:software_version_id>
+            <proc:software_availability>${proc_sw_avail}</proc:software_availability>
+            <proc:software_type>${proc_sw_type}</proc:software_type>
+            <proc:Software_Program py:for="prog in software_programs">
+              <proc:name>${prog.name}</proc:name>
+              <proc:Software_Program_Parameters py:if="prog.params">
+                <proc:Parameter py:for="param in prog.params">
+                  <proc:name>${param.name}</proc:name>
+                  <proc:parameter_type>${param.type}</proc:parameter_type>
+                  <proc:value>${param.value}</proc:value>
+                </proc:Parameter>
+              </proc:Software_Program_Parameters>
+            </proc:Software_Program>
+          </proc:Software>
+        </proc:Process>
+      </proc:Processing_Information>
+    </Discipline_Area>
+  </Observation_Area>
+  <Reference_List>
+    <External_Reference py:for="ref in external_reference">
+      <doi>${ref.doi}</doi>
+      <reference_text>${ref.ref_text}</reference_text>
+      <description>${ref.desc}</description>
+    </External_Reference>
+    <Source_Product_External py:for="prod in source_product_external">
+      <external_source_product_identifier>${prod.id}</external_source_product_identifier>
+      <reference_type>${prod.type}</reference_type>
+      <curating_facility>${prod.curating_facility}</curating_facility>
+      <description>${prod.desc}</description>
+    </Source_Product_External>
+  </Reference_List>
+  <File_Area_Observational>
+    <File>
+      <file_name>${file_name}</file_name>
+    </File>
+    <Header>
+      <offset unit="byte">0</offset>
+      <object_length unit="byte">${obj_length}</object_length>
+      <parsing_standard_id>TIFF 6.0</parsing_standard_id>
+      <description>TIFF/GeoTIFF header. The TIFF/GeoTIFF format is used throughout the geospatial and science communities to share geographic image data. </description>
+    </Header>
+    <Array_3D_Image>
+      <local_identifier>image</local_identifier>
+      <offset unit="byte">${image_offset}</offset>
+      <axes>3</axes>
+      <axis_index_order>${axis_index_order}</axis_index_order>
+      <Element_Array>
+        <data_type>${data_type}</data_type>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>Band</axis_name>
+        <elements>1</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Line</axis_name>
+        <elements>${lines}</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Sample</axis_name>
+        <elements>${samples}</elements>
+        <sequence_number>3</sequence_number>
+      </Axis_Array>
+      <Special_Constants>
+        <missing_constant>${missing_constant}</missing_constant>
+      </Special_Constants>
+    </Array_3D_Image>
+  </File_Area_Observational>
+  <File_Area_Observational_Supplemental py:if="file_area_obs_supplemental">
+    <File>
+      <file_name>${faos_file_name}</file_name>
+      <local_identifier>source_product_lids</local_identifier>
+      <creation_date_time>${faos_creation_datetime}</creation_date_time>
+    </File>
+    <Table_Delimited_Source_Product_Internal>
+      <name>${faos_table_name}</name>
+      <offset unit="byte">0</offset>
+      <parsing_standard_id>PDS DSV 1</parsing_standard_id>
+      <description>${faos_table_desc}</description>
+      <records>${faos_records}</records>
+      <record_delimiter>Line-Feed</record_delimiter>
+      <field_delimiter>Comma</field_delimiter>
+      <Record_Delimited>
+        <fields>2</fields>
+        <groups>0</groups>
+        <Field_Delimited>
+          <name>Reference Type</name>
+          <field_number>1</field_number>
+          <data_type>ASCII_String</data_type>
+          <maximum_field_length unit="byte">255</maximum_field_length>
+          <description>This column specifies the reference_type of the source product.</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>LIDVID_LID</name>
+          <field_number>2</field_number>
+          <data_type>ASCII_LIDVID_LID</data_type>
+          <maximum_field_length unit="byte">255</maximum_field_length>
+          <description>${faos_lidvid_desc}</description>
+        </Field_Delimited>
+      </Record_Delimited>
+      <reference_type>table_has_source_products</reference_type>
+    </Table_Delimited_Source_Product_Internal>
+  </File_Area_Observational_Supplemental>
+</Product_Observational>
