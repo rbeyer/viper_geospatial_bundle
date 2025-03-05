@@ -1,0 +1,61 @@
+lid: "urn:nasa:pds:viper_geospatial:data_derived:viper_sfs_mask"
+title: "VIPER Shape from Shading (SfS) Maximally Illuminated Mask map" 
+description: >-
+  Mask derived from the max-lit mosaic.  The non-zero pixels in
+  this 8-bit image are the pixels at which the max-lit mosaic
+  pixel values are greater than 0.005.  This map gives an indication
+  of which pixels in the sfs terrain were supported by images.
+  However, it does not provide an exact match to "detailed" areas
+  in the sfs terrain, as you might expect.  The sfs
+  terrain is not an independent solution, it uses images to "improve"
+  on an existing terrain model.  So in areas where there are only
+  a few images (typically near shadow boundaries) the sfs algorithm
+  is working (thus gets a non-zero value in this map), but is not
+  "improving" the terrain a great deal over the input terrain (which
+  is LOLA), so those areas may still look "smooth."
+modification_details: 
+- version: 999.1
+  date: 2025-03-05
+  description: >-
+    Dumb information model forces this to be a 'valid' version
+    instead of 0.1 for testing, which should be allowed.  This is
+    the first draft.  All version 999 modifications will be removed
+    before PDS release 1.0.
+obs_system_components:
+ - name: Lunar Reconnaissance Orbiter Camera
+   type: Instrument
+proc_name: Mask
+proc_desc: >-
+  This is the processing step that takes as input the SfS Maximally-Illuminated
+  map and produces a mask
+proc_owner: Oleg Alexandrov and Ross Beyer
+proc_inst: NASA Ames Research Center
+proc_sw: Geospatial Data Abstraction Library
+proc_sw_version: 3.7.0
+proc_sw_avail: Open source
+proc_sw_type: C++
+
+software_programs:
+- name: gdal_calc
+  params: 
+  - name: --calc
+    type: Input
+    value: "A*(A>0.005)"
+  - name: -A
+    type: Input
+    value: viper_maxlit.tif
+
+
+external_reference:
+- doi: 10.5281/zenodo.7920947
+  ref_text: >-
+    Rouault, E., Warmerdam, F., Schwehr, K., Kiselev, A., Butler,
+    H., Łoskot, M., Szekeres, T., Tourigny, E., Landa, M., Miara,
+    I., Elliston, B., Chaitanya, K., Plesea, L., Morissette, D.,
+    Jolma, A., & Dawson, N. (2023). GDAL (v3.7.0). Zenodo.
+  desc: This is the citation for the Geospatial Data Abstraction Library (GDAL) software.
+
+source_product_internal:
+- lidvid: "urn:nasa:pds:viper_geospatial:data_derived:viper_maxlit::1.0"
+  type: data_to_derived_source_product
+  comment: This is the source TIFF for gdal_calc.
