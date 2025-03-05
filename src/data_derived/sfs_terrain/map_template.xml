@@ -205,7 +205,7 @@
         <elements>${samples}</elements>
         <sequence_number>3</sequence_number>
       </Axis_Array>
-      <Special_Constants>
+      <Special_Constants py:if="missing_constant">
         <missing_constant>${missing_constant}</missing_constant>
       </Special_Constants>
     </Array_3D_Image>

@@ -91,10 +91,14 @@ def main():
         root,
         ".//pds:File_Area_Observational/pds:Array_3D_Image/pds:Element_Array/pds:data_type",
     )
-    d["missing_constant"] = find_text(
-        root,
-        ".//pds:File_Area_Observational/pds:Array_3D_Image/pds:Special_Constants/pds:missing_constant",
-    )
+
+    try:
+        d["missing_constant"] = find_text(
+            root,
+            ".//pds:File_Area_Observational/pds:Array_3D_Image/pds:Special_Constants/pds:missing_constant",
+        )
+    except ValueError:
+        d["missing_constant"] = False
 
     for axis in root.findall(".//pds:Array_3D_Image/pds:Axis_Array", ns):
         if find_text(axis, "pds:axis_name") == "Line":
