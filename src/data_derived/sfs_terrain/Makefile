@@ -13,19 +13,19 @@ SFSGDAL = $(addsuffix _gdal.xml, $(notdir $(basename $(SFS))))
 SFSLBL = $(addsuffix .xml, $(notdir $(basename $(SFS))))
 SFSYML = $(addsuffix .yml, $(notdir $(basename $(SFSLBL))))
 SFSTIFF = $(addsuffix .tif, $(notdir $(basename $(SFS))))
+
 COUNT = /Users/rbeyer/projects/viper/viper-maps/lroc-nac-maps/counts.tif
+COUNTGDAL = $(addprefix viper_, $(addsuffix _gdal.xml, $(notdir $(basename $(COUNT)))))
 COUNTLBL = $(addprefix viper_, $(addsuffix .xml, $(notdir $(basename $(COUNT)))))
+COUNTYML = $(addsuffix .yml, $(notdir $(basename $(COUNTLBL))))
+COUNTTIFF = $(addsuffix .tif, $(notdir $(basename $(COUNTLBL))))
+
 HEIGHTE = /Users/rbeyer/projects/viper/viper-maps/sfs/viper_sfs_height_error.tif
 HEIGHTELBL = $(addsuffix .xml, $(notdir $(basename $(HEIGHTE))))
 
-LABELS = $(SFSLBL)
-TOCLEAN = $(SFSGDAL) $(SFSTIFF)
-CREATIONOPTS = -co IMAGE_FORMAT=GEOTIFF \
-	-co VAR_LOGICAL_IDENTIFIER=urn:nasa:pds:viper_geospatial:data_derived:viper_ \
-	-co VAR_INVESTIGATION_AREA_NAME=VIPER \
-	-co VAR_INVESTIGATION_AREA_LID_REFERENCE=urn:nasa:pds:viper \
-	-co VAR_TARGET_TYPE=Satellite \
-	-co VAR_target_type=satellite.earth.moon
+LABELS = $(SFSLBL) $(COUNTLBL)
+TOCLEAN = $(SFSGDAL) $(SFSTIFF) $(COUNTGDAL) $(COUNTTIFF)
+CREATIONOPTS = -co IMAGE_FORMAT=GEOTIFF
 
 .PHONY: all sfs-dem validate
 
@@ -37,7 +37,8 @@ sfs-dem:
 	$(MAP_LABEL) -t map_template.xml -o $(SFSLBL) -c viper_sfs_images.csv -y $(SFSYML) $(SFSGDAL)
 
 sfs-count:
-	gdal_translate -of PDS4 $(COUNT) $(CREATIONOPTS) $(COUNTLBL)
+	gdal_translate -of PDS4 $(COUNT) $(CREATIONOPTS) $(COUNTGDAL)
+	$(MAP_LABEL) -t map_template.xml -o $(COUNTLBL) -c viper_ortho_images.csv -y $(COUNTYML) $(COUNTGDAL)
 
 sfs-heighte:
 	gdal_translate -of PDS4 $(HEIGHTE) $(CREATIONOPTS) $(HEIGHTELBL)
