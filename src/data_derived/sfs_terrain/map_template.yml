@@ -51,6 +51,11 @@ source_product_external:  # or source_product_external: []
     to build this product is designated as "Site2-v2: Leibnitz beta
     plateau, extended boundaries" on that GSFC site.
 
+source_product_internal:  # or source_product_internal: []
+  - lidvid: "urn:foo::1.0"
+    type: data_to_derived_source_product
+    comment: Explain
+
 file_area_obs_supplemental: False
 faos_file_name: some.csv
 faos_table_name: LROC table

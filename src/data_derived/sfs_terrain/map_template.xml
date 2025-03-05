@@ -166,6 +166,11 @@
       <curating_facility>${prod.curating_facility}</curating_facility>
       <description>${prod.desc}</description>
     </Source_Product_External>
+    <Source_Product_Internal py:for="prod in source_product_internal">
+      <lidvid_reference>${prod.lidvid}</lidvid_reference>
+      <reference_type>${prod.type}</reference_type>
+      <comment>${prod.comment}</comment>
+    </Source_Product_Internal>
   </Reference_List>
   <File_Area_Observational>
     <File>

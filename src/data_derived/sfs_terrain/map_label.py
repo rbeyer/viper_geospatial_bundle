@@ -41,6 +41,18 @@ def main():
     # Now read in the YAML to populate the dictionary.
     d = yaml.safe_load(args.yaml.read_text())
 
+    # Add some empty entries so I don't have to remember to include them in every .yml file
+    for i, p in enumerate(d["software_programs"]):
+        if "desc" not in p:
+            d["software_programs"][i]["desc"] = False
+        if "params" not in p:
+            d["software_programs"][i]["params"] = []
+
+    d.setdefault("external_reference", [])
+    d.setdefault("source_product_external", [])
+    d.setdefault("source_product_internal", [])
+    d.setdefault("file_area_obs_supplemental", False)
+
     # check lid / filename consistency
     if d["lid"].split(":")[-1] != args.output.stem:
         parser.error(
