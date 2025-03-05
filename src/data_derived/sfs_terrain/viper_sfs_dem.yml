@@ -1,0 +1,106 @@
+
+lid: "urn:nasa:pds:viper_geospatial:lroc_orthoimages:viper_sfs_dem"
+title: "VIPER Shape from Shading (SfS) Digital Elevation Model (DEM)" 
+description: >
+  Shape from Shading Digital Elevation Model as a GeoTIFF with
+  32-bit pixels indicating the elevation with respect to the lunar
+  radius of 1,737,400 m at 1 m/pixel.  In areas not illuminated in
+  any of the source LROC NAC images, one of two things were done.
+  If the area was small, the pixels were filled by interpolating
+  the SfS data.  If the area was larger, then the area was filled
+  with improved LOLA data, and a smooth blend from SfS to LOLA was
+  applied.
+modification_details: 
+- version: 999.1
+  date: 2025-03-05
+  description: >
+    Dumb information model forces this to be a 'valid' version
+    instead of 0.1 for testing, which should be allowed.  This is
+    the first draft.  All version 999 modifications will be removed
+    before PDS release 1.0.
+obs_system_components:
+ - name: Lunar Reconnaissance Orbiter Camera
+ - name: Lunar Orbiter Laser Altimeter
+   type: Instrument
+proc_name: Shape-from-Shading
+proc_desc: >
+  This is the processing step that takes as input the LOLA terrain
+  and the LROC images to produce this SfS terrain model.
+proc_owner: Oleg Alexandrov and Ross Beyer
+proc_inst: NASA Ames Research Center
+proc_sw: NASA Ames Stereo Pipeline
+proc_sw_version: 3.2.0
+proc_sw_avail: Open source
+proc_sw_type: C++
+
+software_programs:
+- name: sfs
+  params: False
+- name: sfs_blend
+  params:
+  - name: --image-threshold
+    type: Input
+    value: 0.004
+  - name: --lit-blend-length
+    type: Input
+    value: 5
+  - name: --shadow-blend-length
+    type: Input
+    value: 5
+  - name: --min-blend-size
+    type: Input
+    value: 50
+  - name: --weight-blue-sigma
+    type: Input
+    value: 5
+
+
+external_reference:
+- doi: 10.3847/PSJ/??????
+  ref_text: Beyer et al. (to be submitted), VIPER Site Analysis, PSJ
+  desc: This paper provides a description of the methods and process used to produce this SfS DEM.
+- doi: 10.1016/j.pss.2020.105119
+  ref_text: >
+    Barker, M.K., et al. (2021), Improved LOLA Elevation Maps for
+    South Pole Landing Sites: Error Estimates and Their Impact on
+    Illumination Conditions, Planetary and Space Science, Volume
+    203, 1 September 2021, 105119,  doi:10.1016/j.pss.2020.105119.
+  desc: >
+    This paper provides a detailed description of the methods used
+    to produce the improved LOLA terrain models in the
+    Source_Product_External LOLA:Barker:78.
+- doi: 10.1029/2018EA000409
+  ref_text: >
+    "Beyer, Ross A., Oleg Alexandrov, and Scott McMichael. 2018.
+    The Ames Stereo Pipeline: NASA’s open source software for
+    deriving and processing terrain data. Earth and Space Science,
+    5."
+  desc: This paper provides a description of the NASA ASP software.
+- doi: 10.1029/2018EA000390
+  ref_text: >
+    Alexandrov, O. and Beyer, R. A. (2018). Multiview shape-from-shading for planetary images. Earth and Space Science, 5, 652–666.
+  desc: This paper provides a description of the SfS process in NASA ASP.
+- doi: 10.5281/zenodo.7497499
+  ref_text: "Oleg Alexandrov, et al. (2023). NeoGeographyToolkit/StereoPipeline: ASP 3.2.0 (3.2.0). Zenodo."
+  desc: This is the DOI for the version of the NASA ASP software used to produce this product.
+
+source_product_external:
+- id: LOLA:Barker:78
+  type: data_to_derived_source_product
+  curating_facility: Goddard Space Flight Center
+  # desc: <
+  #   This external product is a web page
+  #   (https://pgda.gsfc.nasa.gov/products/78) that contains improved
+  #   LOLA digital elevation models (DEMs) of several regions surrounding
+  #   high-priority lunar south pole landing sites using exclusively
+  #   laser altimetry data acquired by LRO-LOLA. The data there used
+  #   to build this product is designated as "Site2-v2: Leibnitz beta
+  #   plateau, extended boundaries" on that GSFC site.
+
+file_area_obs_supplemental: True
+faos_file_name: some.csv
+faos_table_name: LROC NAC Source LIDVIDs
+faos_table_desc: >
+  This table is a list of the product lidvids of all LROC NAC
+  products used to create this terrain model.
+faos_lidvid_desc: LROC NAC LIDVID
