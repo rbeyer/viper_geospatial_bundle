@@ -1,0 +1,57 @@
+# This is a generic-ish YAML file meant to be operated on by map_label.py -c
+#
+lid: "urn:nasa:pds:viper_geospatial:lroc_orthoimages:"  # Yes, only partial when map_label.py -c is used.
+title: VIPER Orthorectified LROC NAC image
+description: >-
+  This is a Lunar Reconnaissance Orbiter Camera (LROC) Narrow Angle
+  Camera (NAC) image orthorectified to a Shape-from-Shading (SfS)
+  digital terrain model (DTM).
+modification_details: 
+- version: 999.1
+  date: "2025-03-05"
+  description: >-
+    Dumb information model forces this to be a 'valid' version
+    instead of 0.1 for testing, which should be allowed.  This is
+    the first draft.  All version 999 modifications will be removed
+    before PDS release 1.0.
+
+obs_system_components:
+ - name: Lunar Reconnaissance Orbiter Camera
+   type: Instrument
+
+proc_name: Orthorectification
+proc_desc: This process map-projects the bundle-adjusted LROC NAC image onto the SfS terrain.
+proc_owner: Oleg Alexandrov and Ross Beyer
+proc_inst: NASA Ames Research Center
+proc_sw: NASA Ames Stereo Pipeline
+proc_sw_version: 3.2.0
+proc_sw_avail: Open source
+proc_sw_type: C++
+
+software_programs:
+- name: mapproject
+  params:
+  - name: viper_sfs_dem.tif 
+    type: Input
+    value: None, this is a positional argument.
+  - name: --mpp
+    type: Input
+    value: 1
+
+external_reference:
+- doi: 10.1029/2018EA000409
+  ref_text: >-
+    Beyer, Ross A., Oleg Alexandrov, and Scott McMichael. 2018.
+    The Ames Stereo Pipeline: NASA’s open source software for
+    deriving and processing terrain data. Earth and Space Science,
+    5.
+  desc: This paper provides a description of the NASA ASP software.
+- doi: 10.5281/zenodo.7497499
+  ref_text: "Oleg Alexandrov, et al. (2023). NeoGeographyToolkit/StereoPipeline: ASP 3.2.0 (3.2.0). Zenodo."
+  desc: This is the DOI for the version of the NASA ASP software used to produce this product.
+
+source_product_internal:
+  - lidvid: "urn:nasa:pds:viper_geospatial:data_derived:viper_sfs_dem::1.0"
+    type: data_to_derived_source_product
+    comment: The terrain model to orthorectify the image upon.
+# There is another Source_Product_Internal that will get added by map_label.py -c

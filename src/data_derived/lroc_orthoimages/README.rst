@@ -1,7 +1,7 @@
 VIPER Geospatial data_derived/lroc_orthoimages
 ==============================================
 
-The creation of PDS4 XML labels in this directory generally begins with a `gdal_translate` followed by a `\.ortho_label.py` (see Makefile), to condition the XML and produce a better label.
+The creation of PDS4 XML labels in this directory generally begins with a `gdal_translate` followed by a `map_label.py` (see Makefile), to condition the XML and produce a better label.
 
 
 lroc_list.csv

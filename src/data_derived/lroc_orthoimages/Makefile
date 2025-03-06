@@ -1,13 +1,16 @@
 # make sure to have done "conda activate vipersci"
-#
+
+MAP_LABEL = ../map_label.py
+MAP_TEMP = ../map_template.xml
 VALIDATE = validate
 CATALOG = ../../catalog23.xml
+CREATIONOPTS = -co IMAGE_FORMAT=GEOTIFF
 
+ORTHO = /Users/rbeyer/projects/viper/viper-maps/lroc-nac-maps/M108993634RE.map.tif
+ORTHOGDAL = $(addsuffix _gdal.xml, $(notdir $(basename $(ORTHO))))
 
-TESTMAP = /Users/rbeyer/projects/viper/viper-maps/lroc-nac-maps/M108993634RE.map.tif
-MAPLBL = $(addsuffix .xml, $(notdir $(basename $(TESTMAP))))
+# MAPLBL = $(addsuffix .xml, $(notdir $(basename $(TESTMAP))))
 
-LABELS = $(MAPLBL)
 
 .PHONY: all sfs-dem validate
 
@@ -18,12 +21,17 @@ map:
 	gdal_translate -of PDS4 $(TESTMAP) -co IMAGE_FORMAT=GEOTIFF $(MAPLBL)
 	./ortho_label.py -t ortho-template.xml -c lroc_list.csv $(MAPLBL)
 
+ortho:
+	gdal_translate -of PDS4 $(ORTHO) $(CREATIONOPTS) $(ORTHOGDAL)
+	$(MAP_LABEL) -t $(MAP_TEMP) -c lroc_list.csv -y ortho.yml $(ORTHOGDAL)
+
+
 validate:
 	# $(VALIDATE) --skip-context-validation --target $(LABELS)
 	$(VALIDATE) --skip-context-validation --catalog $(CATALOG) --target $(LABELS)
 
 clean:
-	rm -rf $(LABELS)
+	rm -rf nac.m*ortho.xml
 
 realclean: clean
-	rm -rf $(addsuffix .tif, $(basename $(LABELS)))
+	rm -rf nac.m*ortho.tif

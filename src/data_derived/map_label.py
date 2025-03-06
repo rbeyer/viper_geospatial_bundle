@@ -9,6 +9,7 @@ from pathlib import Path
 from xml.etree import ElementTree as ET
 import sys
 
+import pandas as pd
 import yaml
 
 from vipersci.pds.datetime import isozformat
@@ -21,14 +22,24 @@ def arg_parser():
         description=__doc__,
     )
     parser.add_argument(
-        "-t", "--template", type=Path, help="XML template to use to create the output."
+        "-c",
+        "--csv",
+        help="The csv file of LROC LIDVIDS to read for orthoimage labels.",
     )
     parser.add_argument("-o", "--output", type=Path, help="Output XML label file.")
-    parser.add_argument("-c", "--csv", help="The csv file of LROC LIDVIDS to read.")
+    parser.add_argument(
+        "-t", "--template", type=Path, help="XML template to use to create the output."
+    )
     parser.add_argument("-y", "--yaml", type=Path, help="The YAML file to load.")
     parser.add_argument("input", type=Path, help="Input XML label written by GDAL.")
 
     return parser
+
+
+def get_lv(path, product_id):
+    df = pd.read_csv(path, names=["reference_type", "lidvid"])
+    row = df[df["lidvid"].str.contains(product_id.lower())]
+    return row["lidvid"].get(0)
 
 
 def main():
@@ -53,11 +64,31 @@ def main():
     d.setdefault("source_product_internal", [])
     d.setdefault("file_area_obs_supplemental", False)
 
-    # check lid / filename consistency
-    if d["lid"].split(":")[-1] != args.output.stem:
-        parser.error(
-            f"The LID ({d['lid']}) does not match the output filename ({args.output.stem})."
+    if args.csv:
+        # This is the trigger to assume that this is a label for a VIPER LROC Orthoimage,
+        # which requires a little different handling.
+        lroc_lidvid = get_lv(args.csv, args.input.name.split(".")[0])
+        lroc_name = lroc_lidvid.split("::")[0].split(":")[-1]
+        lid = lroc_name + "-ortho"
+        args.output = Path(f"{lid}.xml")
+
+        d["lid"] += lid
+        d["title"] += " " + lroc_name
+
+        d["source_product_internal"].append(
+            {
+                "lidvid": lroc_lidvid,
+                "type": "data_to_derived_source_product",
+                "comment": "The LROC NAC image which is orthorectified.",
+            }
         )
+
+    else:
+        # check lid / filename consistency
+        if d["lid"].split(":")[-1] != args.output.stem:
+            parser.error(
+                f"The LID ({d['lid']}) does not match the output filename ({args.output.stem})."
+            )
 
     # Sort GeoTIFF file
     gdal_tif = args.input.with_suffix(".tif")
