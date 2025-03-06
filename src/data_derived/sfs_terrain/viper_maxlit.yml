@@ -1,0 +1,62 @@
+lid: "urn:nasa:pds:viper_geospatial:data_derived:viper_maxlit"
+title: "VIPER Shape from Shading (SfS) Maximally-illuminated LROC Mosaic" 
+description: >-
+  Maximally-illuminated mosaic based on LROC NAC images.  This
+  ortho-mosaic is a combination of the co-registered VIPER LROC NAC
+  Orthoimages such that for each pixel in the output mosaic, the
+  brightest pixel from the input images at that location is used.
+  This provides a mosaic that "appears" to have sunlight coming
+  from multiple directions, but attempts to show all of the illuminated
+  terrain in this area.  This is a 32-bit GeoTIFF.
+modification_details: 
+- version: 999.1
+  date: 2025-03-05
+  description: >-
+    Dumb information model forces this to be a 'valid' version
+    instead of 0.1 for testing, which should be allowed.  This is
+    the first draft.  All version 999 modifications will be removed
+    before PDS release 1.0.
+obs_system_components:
+ - name: Lunar Reconnaissance Orbiter Camera
+   type: Instrument
+proc_name: Create Maximally-Illuminated Mosaic
+proc_desc: >-
+  This is the processing step that takes as input the VIPER LROC
+  ortho images to produce this max-lit mosaic.
+proc_owner: Oleg Alexandrov and Ross Beyer
+proc_inst: NASA Ames Research Center
+proc_sw: NASA Ames Stereo Pipeline
+proc_sw_version: 3.2.0
+proc_sw_avail: Open source
+proc_sw_type: C++
+
+software_programs:
+- name: dem_mosaic
+  params:
+  - name: --max
+    type: Input
+    value: None, does not accept values, --max is a flag only.
+
+external_reference:
+- doi: 10.3847/PSJ/??????
+  ref_text: Beyer et al. (to be submitted), VIPER Site Analysis, PSJ
+  desc: This paper provides a description of the methods and process used to produce this SfS DEM.
+- doi: 10.1029/2018EA000409
+  ref_text: >-
+    Beyer, Ross A., Oleg Alexandrov, and Scott McMichael. 2018.
+    The Ames Stereo Pipeline: NASA’s open source software for
+    deriving and processing terrain data. Earth and Space Science,
+    5.
+  desc: This paper provides a description of the NASA ASP software.
+- doi: 10.5281/zenodo.7497499
+  ref_text: "Oleg Alexandrov, et al. (2023). NeoGeographyToolkit/StereoPipeline: ASP 3.2.0 (3.2.0). Zenodo."
+  desc: This is the DOI for the version of the NASA ASP software used to produce this product.
+
+# This is a problem, seems like this should also point to the ortho_image list.
+# file_area_obs_supplemental: True
+# faos_file_name: viper_ortho_images.csv
+# faos_table_name: VIPER LROC NAC Orthoimage Source LIDVIDs
+# faos_table_desc: >-
+#   This table is a list of the product lidvids of all VIPER LROC NAC
+#   Orthoimage products used to create this count map.
+# faos_lidvid_desc: VIPER LROC NAC Orthoimage LIDVID

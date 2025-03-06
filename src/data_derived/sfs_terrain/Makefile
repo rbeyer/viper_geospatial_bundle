@@ -50,7 +50,13 @@ WEIGHTGDAL = $(addsuffix _gdal.xml, $(basename $(WEIGHTLBL)))
 WEIGHTYML = $(addsuffix .yml, $(basename $(WEIGHTLBL)))
 WEIGHTTIFF = $(addsuffix .tif, $(basename $(WEIGHTLBL)))
 
-LABELS = $(SFSLBL) $(COUNTLBL) $(HEIGHTELBL) $(HILLLBL) $(MASKLBL) $(SLOPELBL) $(WEIGHTLBL)
+MAXLIT = /Users/rbeyer/projects/viper/viper-maps/sfs/viper_max_lit.tif
+MAXLITLBL = viper_maxlit.xml
+MAXLITGDAL = $(addsuffix _gdal.xml, $(basename $(MAXLITLBL)))
+MAXLITYML = $(addsuffix .yml, $(basename $(MAXLITLBL)))
+MAXLITTIFF = $(addsuffix .tif, $(basename $(MAXLITLBL)))
+
+LABELS = $(SFSLBL) $(COUNTLBL) $(HEIGHTELBL) $(HILLLBL) $(MASKLBL) $(SLOPELBL) $(WEIGHTLBL) $(MAXLITLBL)
 TOCLEAN = $(SFSGDAL) $(SFSTIFF) \
 	  $(COUNTGDAL) $(COUNTTIFF) \
 	  $(HEIGHTEGDAL) $(HEIGHTETIFF) \
@@ -58,40 +64,45 @@ TOCLEAN = $(SFSGDAL) $(SFSTIFF) \
 	  $(MASKGDAL) $(MASKTIFF) \
 	  $(SLOPEGDAL) $(SLOPETIFF) \
 	  $(WEIGHTGDAL) $(WEIGHTTIFF) \
+	  $(MAXLITGDAL) $(MAXLITTIFF) \
 
 CREATIONOPTS = -co IMAGE_FORMAT=GEOTIFF
 
-.PHONY: all sfs-dem validate
+.PHONY: all validate
 
-all: sfs-dem sfs-count sfs-heighte sfs-hs sfs-mask sfs-slope sfs-weight
+all: dem count heighte hs mask slope weight maxlit
 
-sfs-dem:
+dem:
 	gdal_translate -of PDS4 $(SFS) $(CREATIONOPTS) $(SFSGDAL)
 	$(MAP_LABEL) -t map_template.xml -o $(SFSLBL) -c viper_sfs_images.csv -y $(SFSYML) $(SFSGDAL)
 
-sfs-count:
+count:
 	gdal_translate -of PDS4 $(COUNT) $(CREATIONOPTS) $(COUNTGDAL)
 	$(MAP_LABEL) -t map_template.xml -o $(COUNTLBL) -c viper_ortho_images.csv -y $(COUNTYML) $(COUNTGDAL)
 
-sfs-heighte:
+heighte:
 	gdal_translate -of PDS4 $(HEIGHTE) $(CREATIONOPTS) $(HEIGHTEGDAL)
 	$(MAP_LABEL) -t map_template.xml -o $(HEIGHTELBL) -y $(HEIGHTEYML) $(HEIGHTEGDAL)
 
-sfs-hs:
+hs:
 	gdal_translate -of PDS4 $(HILL) $(CREATIONOPTS) $(HILLGDAL)
 	$(MAP_LABEL) -t map_template.xml -o $(HILLLBL) -y $(HILLYML) $(HILLGDAL)
 
-sfs-mask:
+mask:
 	gdal_translate -of PDS4 $(MASK) $(CREATIONOPTS) $(MASKGDAL)
 	$(MAP_LABEL) -t map_template.xml -o $(MASKLBL) -y $(MASKYML) $(MASKGDAL)
 
-sfs-slope:
+slope:
 	gdal_translate -of PDS4 $(SLOPE) $(CREATIONOPTS) $(SLOPEGDAL)
 	$(MAP_LABEL) -t map_template.xml -o $(SLOPELBL) -y $(SLOPEYML) $(SLOPEGDAL)
 
-sfs-weight:
+weight:
 	gdal_translate -of PDS4 $(WEIGHT) $(CREATIONOPTS) $(WEIGHTGDAL)
 	$(MAP_LABEL) -t map_template.xml -o $(WEIGHTLBL) -y $(WEIGHTYML) $(WEIGHTGDAL)
+
+maxlit:
+	gdal_translate -of PDS4 $(MAXLIT) $(CREATIONOPTS) $(MAXLITGDAL)
+	$(MAP_LABEL) -t map_template.xml -o $(MAXLITLBL) -y $(MAXLITYML) $(MAXLITGDAL)
 
 validate:
 	# $(VALIDATE) --skip-context-validation --target $(LABELS)
