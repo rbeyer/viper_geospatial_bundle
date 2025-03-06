@@ -11,13 +11,22 @@ DICELBL = viper_dice.xml
 DICEGDAL = $(addsuffix _gdal.xml, $(basename $(DICELBL)))
 DICEYML = $(addsuffix .yml, $(basename $(DICELBL)))
 
+PDICE = /Users/rbeyer/projects/viper/viper-maps/depth-to-ice/viper_paleo_dice.tif
+PDICELBL = viper_paleo_dice.xml
+PDICEGDAL = $(addsuffix _gdal.xml, $(basename $(PDICELBL)))
+PDICEYML = $(addsuffix .yml, $(basename $(PDICELBL)))
+
 .PHONY: all clean realclean
 
-all: dice
+all: dice pdice
 
 dice:
 	gdal_translate -of PDS4 $(DICE) $(CREATIONOPTS) $(DICEGDAL)
 	$(MAP_LABEL) -t $(MAP_TEMP) -o $(DICELBL) -y $(DICEYML) $(DICEGDAL)
+
+pdice:
+	gdal_translate -of PDS4 $(PDICE) $(CREATIONOPTS) $(PDICEGDAL)
+	$(MAP_LABEL) -t $(MAP_TEMP) -o $(PDICELBL) -y $(PDICEYML) $(PDICEGDAL)
 
 validate:
 	# $(VALIDATE) --skip-context-validation --target *.xml
