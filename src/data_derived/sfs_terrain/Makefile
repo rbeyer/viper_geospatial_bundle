@@ -38,18 +38,25 @@ MASKGDAL = $(addsuffix _gdal.xml, $(basename $(MASKLBL)))
 MASKYML = $(addsuffix .yml, $(basename $(MASKLBL)))
 MASKTIFF = $(addsuffix .tif, $(basename $(MASKLBL)))
 
-LABELS = $(SFSLBL) $(COUNTLBL) $(HEIGHTELBL) $(HILLLBL) $(MASKLBL)
+SLOPE = /Users/rbeyer/projects/viper/viper-maps/sfs/viper_sfs_dem_slopes.tif
+SLOPELBL = viper_sfs_slope.xml
+SLOPEGDAL = $(addsuffix _gdal.xml, $(basename $(SLOPELBL)))
+SLOPEYML = $(addsuffix .yml, $(basename $(SLOPELBL)))
+SLOPETIFF = $(addsuffix .tif, $(basename $(SLOPELBL)))
+
+LABELS = $(SFSLBL) $(COUNTLBL) $(HEIGHTELBL) $(HILLLBL) $(MASKLBL) $(SLOPELBL)
 TOCLEAN = $(SFSGDAL) $(SFSTIFF) \
 	  $(COUNTGDAL) $(COUNTTIFF) \
 	  $(HEIGHTEGDAL) $(HEIGHTETIFF) \
 	  $(HILLGDAL) $(HILLTIFF) \
 	  $(MASKGDAL) $(MASKTIFF) \
+	  $(SLOPEGDAL) $(SLOPETIFF) \
 
 CREATIONOPTS = -co IMAGE_FORMAT=GEOTIFF
 
 .PHONY: all sfs-dem validate
 
-all: sfs-dem sfs-count sfs-heighte sfs-hs sfs-mask
+all: sfs-dem sfs-count sfs-heighte sfs-hs sfs-mask sfs-slope
 
 sfs-dem:
 	gdal_translate -of PDS4 $(SFS) $(CREATIONOPTS) $(SFSGDAL)
@@ -70,6 +77,10 @@ sfs-hs:
 sfs-mask:
 	gdal_translate -of PDS4 $(MASK) $(CREATIONOPTS) $(MASKGDAL)
 	$(MAP_LABEL) -t map_template.xml -o $(MASKLBL) -y $(MASKYML) $(MASKGDAL)
+
+sfs-slope:
+	gdal_translate -of PDS4 $(SLOPE) $(CREATIONOPTS) $(SLOPEGDAL)
+	$(MAP_LABEL) -t map_template.xml -o $(SLOPELBL) -y $(SLOPEYML) $(SLOPEGDAL)
 
 validate:
 	# $(VALIDATE) --skip-context-validation --target $(LABELS)
