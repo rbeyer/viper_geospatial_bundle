@@ -1,7 +1,7 @@
 lid: "urn:nasa:pds:viper_geospatial:data_derived:viper_sfs_slope"
 title: "VIPER Shape from Shading (SfS) Digital Elevation Model (DEM) Slope map" 
 description: >-
-  This is a slope map of the VIPER SfS DEM.
+  The pixel-to-pixel slope of the SfS DEM in degrees computed using Horn's formula.
 modification_details: 
 - version: 999.1
   date: 2025-03-05
