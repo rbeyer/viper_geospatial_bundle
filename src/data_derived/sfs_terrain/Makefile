@@ -3,7 +3,8 @@
 # Each of the sfs-* targets will need manual adjustments to the produced XML after being 
 # generated.
 
-MAP_LABEL = ./map_label.py
+MAP_LABEL = ../map_label.py
+MAP_TEMP = ../map_template.xml
 VALIDATE = validate
 CATALOG = ../../catalog23.xml
 
@@ -74,35 +75,35 @@ all: dem count heighte hs mask slope weight maxlit
 
 dem:
 	gdal_translate -of PDS4 $(SFS) $(CREATIONOPTS) $(SFSGDAL)
-	$(MAP_LABEL) -t map_template.xml -o $(SFSLBL) -c viper_sfs_images.csv -y $(SFSYML) $(SFSGDAL)
+	$(MAP_LABEL) -t $(MAP_TEMP) -o $(SFSLBL) -c viper_sfs_images.csv -y $(SFSYML) $(SFSGDAL)
 
 count:
 	gdal_translate -of PDS4 $(COUNT) $(CREATIONOPTS) $(COUNTGDAL)
-	$(MAP_LABEL) -t map_template.xml -o $(COUNTLBL) -c viper_ortho_images.csv -y $(COUNTYML) $(COUNTGDAL)
+	$(MAP_LABEL) -t $(MAP_TEMP) -o $(COUNTLBL) -c viper_ortho_images.csv -y $(COUNTYML) $(COUNTGDAL)
 
 heighte:
 	gdal_translate -of PDS4 $(HEIGHTE) $(CREATIONOPTS) $(HEIGHTEGDAL)
-	$(MAP_LABEL) -t map_template.xml -o $(HEIGHTELBL) -y $(HEIGHTEYML) $(HEIGHTEGDAL)
+	$(MAP_LABEL) -t $(MAP_TEMP) -o $(HEIGHTELBL) -y $(HEIGHTEYML) $(HEIGHTEGDAL)
 
 hs:
 	gdal_translate -of PDS4 $(HILL) $(CREATIONOPTS) $(HILLGDAL)
-	$(MAP_LABEL) -t map_template.xml -o $(HILLLBL) -y $(HILLYML) $(HILLGDAL)
+	$(MAP_LABEL) -t $(MAP_TEMP) -o $(HILLLBL) -y $(HILLYML) $(HILLGDAL)
 
 mask:
 	gdal_translate -of PDS4 $(MASK) $(CREATIONOPTS) $(MASKGDAL)
-	$(MAP_LABEL) -t map_template.xml -o $(MASKLBL) -y $(MASKYML) $(MASKGDAL)
+	$(MAP_LABEL) -t $(MAP_TEMP) -o $(MASKLBL) -y $(MASKYML) $(MASKGDAL)
 
 slope:
 	gdal_translate -of PDS4 $(SLOPE) $(CREATIONOPTS) $(SLOPEGDAL)
-	$(MAP_LABEL) -t map_template.xml -o $(SLOPELBL) -y $(SLOPEYML) $(SLOPEGDAL)
+	$(MAP_LABEL) -t $(MAP_TEMP) -o $(SLOPELBL) -y $(SLOPEYML) $(SLOPEGDAL)
 
 weight:
 	gdal_translate -of PDS4 $(WEIGHT) $(CREATIONOPTS) $(WEIGHTGDAL)
-	$(MAP_LABEL) -t map_template.xml -o $(WEIGHTLBL) -y $(WEIGHTYML) $(WEIGHTGDAL)
+	$(MAP_LABEL) -t $(MAP_TEMP) -o $(WEIGHTLBL) -y $(WEIGHTYML) $(WEIGHTGDAL)
 
 maxlit:
 	gdal_translate -of PDS4 $(MAXLIT) $(CREATIONOPTS) $(MAXLITGDAL)
-	$(MAP_LABEL) -t map_template.xml -o $(MAXLITLBL) -y $(MAXLITYML) $(MAXLITGDAL)
+	$(MAP_LABEL) -t $(MAP_TEMP) -o $(MAXLITLBL) -y $(MAXLITYML) $(MAXLITGDAL)
 
 validate:
 	# $(VALIDATE) --skip-context-validation --target $(LABELS)
