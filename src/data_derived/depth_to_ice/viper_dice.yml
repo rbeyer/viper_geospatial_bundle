@@ -1,0 +1,57 @@
+lid: "urn:nasa:pds:viper_geospatial:data_derived:viper_dice"
+title: "VIPER Depth to Ice Map" 
+description: >-
+  The pixel values in this map represent the depth (in meters) at
+  which ice could be stable at each location.  This map was rasterized
+  from a combination of meshes with variable facet sizes, a large
+  area with 10 m facets in some areas, and a few specific areas
+  with fine triangles 2 m in size.  The geometry of these meshes
+  were derived from converting the viper_sfs_dem.tif into a mesh
+  of varying sizes, but the depth values for each facet were derived
+  from the modeling process. Since this file is rasterized from
+  source data with a variety of different mesh sizes, this map has
+  a 0.5 m/pixel ground scale distance, which allows discernment of
+  the finest 2 m meshes in the source data.  The "nodata" values
+  in the map indicate areas where the model did not find an ice
+  stability depth as far down as 2.5 m.
+modification_details: 
+- version: 999.1
+  date: "2025-03-05"
+  description: >-
+    Dumb information model forces this to be a 'valid' version
+    instead of 0.1 for testing, which should be allowed.  This is
+    the first draft.  All version 999 modifications will be removed
+    before PDS release 1.0.
+
+obs_system_components:
+ - name: Lunar Reconnaissance Orbiter Camera
+   type: Instrument
+
+proc_name: Depth to Ice Stability
+proc_desc: >-
+  This processing step takes the SfS DEM as input and performs thermal modeling
+  to derive the depth to ice stability.
+proc_owner: Matt Siegler and Jose Martinez-Camacho
+proc_inst: Planetary Science Institute and Southern Methodist University
+
+external_reference:
+- doi: 10.3847/PSJ/??????
+  ref_text: Beyer et al. (to be submitted), VIPER Site Analysis, PSJ
+  desc: This paper provides a description of the methods and process used to produce this map.
+  ref_text: >-
+    Paige, D. A., et al. (2010), Diviner lunar radiometer observations
+    of cold traps in the Moon’s south polar region. Science,
+    330(6003), 479-482.
+  desc: This paper established the concept of calculating ice stability depth.
+- doi: 10.5281/zenodo.7920947
+  ref_text: >-
+    Rouault, E., Warmerdam, F., Schwehr, K., Kiselev, A., Butler,
+    H., Łoskot, M., Szekeres, T., Tourigny, E., Landa, M., Miara,
+    I., Elliston, B., Chaitanya, K., Plesea, L., Morissette, D.,
+    Jolma, A., & Dawson, N. (2023). GDAL (v3.7.0). Zenodo.
+  desc: The Geospatial Data Abstraction Library (GDAL) software was used to rasterize the mesh.
+
+source_product_internal:
+  - lidvid: "urn:nasa:pds:viper_geospatial:data_derived:viper_sfs_dem::1.0"
+    type: data_to_derived_source_product
+    comment: The SfS terrain model was used to perform the modeling to derive the depth to ice stability.
