@@ -1,0 +1,50 @@
+lid: "urn:nasa:pds:viper_geospatial:data_derived:viper_sfs_slope"
+title: "VIPER Shape from Shading (SfS) Digital Elevation Model (DEM) Slope map" 
+description: >-
+  This is a slope map of the VIPER SfS DEM.
+modification_details: 
+- version: 999.1
+  date: 2025-03-05
+  description: >-
+    Dumb information model forces this to be a 'valid' version
+    instead of 0.1 for testing, which should be allowed.  This is
+    the first draft.  All version 999 modifications will be removed
+    before PDS release 1.0.
+obs_system_components:
+ - name: Lunar Reconnaissance Orbiter Camera
+   type: Instrument
+proc_name: Slope
+proc_desc: >-
+  This is the processing step that takes as input the SfS terrain
+  model and produces a slope map
+proc_owner: Oleg Alexandrov and Ross Beyer
+proc_inst: NASA Ames Research Center
+proc_sw: Geospatial Data Abstraction Library
+proc_sw_version: 3.7.0
+proc_sw_avail: Open source
+proc_sw_type: C++
+
+software_programs:
+- name: gdaldem
+  params:
+  - name: slope
+    type: Input
+    value: None, this option is a flag only.
+  - name: viper_sfs_dem.tif
+    type: Input
+    value: None, this is a positional argument indicating the input DEM.
+
+
+external_reference:
+- doi: 10.5281/zenodo.7920947
+  ref_text: >-
+    Rouault, E., Warmerdam, F., Schwehr, K., Kiselev, A., Butler,
+    H., Łoskot, M., Szekeres, T., Tourigny, E., Landa, M., Miara,
+    I., Elliston, B., Chaitanya, K., Plesea, L., Morissette, D.,
+    Jolma, A., & Dawson, N. (2023). GDAL (v3.7.0). Zenodo.
+  desc: This is the citation for the Geospatial Data Abstraction Library (GDAL) software.
+
+source_product_internal:
+- lidvid: "urn:nasa:pds:viper_geospatial:data_derived:viper_sfs_dem::1.0"
+  type: data_to_derived_source_product
+  comment: This is the terrain model that this slope map was created from.
