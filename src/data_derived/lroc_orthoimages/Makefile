@@ -12,14 +12,10 @@ ORTHOGDAL = $(addsuffix _gdal.xml, $(notdir $(basename $(ORTHO))))
 # MAPLBL = $(addsuffix .xml, $(notdir $(basename $(TESTMAP))))
 
 
-.PHONY: all sfs-dem validate
+.PHONY: all 
 
 all:
 	echo No overall target, review Makefile.
-
-map:
-	gdal_translate -of PDS4 $(TESTMAP) -co IMAGE_FORMAT=GEOTIFF $(MAPLBL)
-	./ortho_label.py -t ortho-template.xml -c lroc_list.csv $(MAPLBL)
 
 ortho:
 	gdal_translate -of PDS4 $(ORTHO) $(CREATIONOPTS) $(ORTHOGDAL)
