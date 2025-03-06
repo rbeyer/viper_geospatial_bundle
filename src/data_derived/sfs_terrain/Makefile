@@ -44,19 +44,26 @@ SLOPEGDAL = $(addsuffix _gdal.xml, $(basename $(SLOPELBL)))
 SLOPEYML = $(addsuffix .yml, $(basename $(SLOPELBL)))
 SLOPETIFF = $(addsuffix .tif, $(basename $(SLOPELBL)))
 
-LABELS = $(SFSLBL) $(COUNTLBL) $(HEIGHTELBL) $(HILLLBL) $(MASKLBL) $(SLOPELBL)
+WEIGHT = /Users/rbeyer/projects/viper/viper-maps/sfs/viper_sfs_weight.tif
+WEIGHTLBL = viper_sfs_weight.xml
+WEIGHTGDAL = $(addsuffix _gdal.xml, $(basename $(WEIGHTLBL)))
+WEIGHTYML = $(addsuffix .yml, $(basename $(WEIGHTLBL)))
+WEIGHTTIFF = $(addsuffix .tif, $(basename $(WEIGHTLBL)))
+
+LABELS = $(SFSLBL) $(COUNTLBL) $(HEIGHTELBL) $(HILLLBL) $(MASKLBL) $(SLOPELBL) $(WEIGHTLBL)
 TOCLEAN = $(SFSGDAL) $(SFSTIFF) \
 	  $(COUNTGDAL) $(COUNTTIFF) \
 	  $(HEIGHTEGDAL) $(HEIGHTETIFF) \
 	  $(HILLGDAL) $(HILLTIFF) \
 	  $(MASKGDAL) $(MASKTIFF) \
 	  $(SLOPEGDAL) $(SLOPETIFF) \
+	  $(WEIGHTGDAL) $(WEIGHTTIFF) \
 
 CREATIONOPTS = -co IMAGE_FORMAT=GEOTIFF
 
 .PHONY: all sfs-dem validate
 
-all: sfs-dem sfs-count sfs-heighte sfs-hs sfs-mask sfs-slope
+all: sfs-dem sfs-count sfs-heighte sfs-hs sfs-mask sfs-slope sfs-weight
 
 sfs-dem:
 	gdal_translate -of PDS4 $(SFS) $(CREATIONOPTS) $(SFSGDAL)
@@ -81,6 +88,10 @@ sfs-mask:
 sfs-slope:
 	gdal_translate -of PDS4 $(SLOPE) $(CREATIONOPTS) $(SLOPEGDAL)
 	$(MAP_LABEL) -t map_template.xml -o $(SLOPELBL) -y $(SLOPEYML) $(SLOPEGDAL)
+
+sfs-weight:
+	gdal_translate -of PDS4 $(WEIGHT) $(CREATIONOPTS) $(WEIGHTGDAL)
+	$(MAP_LABEL) -t map_template.xml -o $(WEIGHTLBL) -y $(WEIGHTYML) $(WEIGHTGDAL)
 
 validate:
 	# $(VALIDATE) --skip-context-validation --target $(LABELS)
