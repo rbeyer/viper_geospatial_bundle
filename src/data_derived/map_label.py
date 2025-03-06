@@ -53,15 +53,17 @@ def main():
     d = yaml.safe_load(args.yaml.read_text())
 
     # Add some empty entries so I don't have to remember to include them in every .yml file
-    for i, p in enumerate(d["software_programs"]):
-        if "desc" not in p:
-            d["software_programs"][i]["desc"] = False
-        if "params" not in p:
-            d["software_programs"][i]["params"] = []
+    if "software_programs" in d:
+        for i, p in enumerate(d["software_programs"]):
+            if "desc" not in p:
+                d["software_programs"][i]["desc"] = False
+            if "params" not in p:
+                d["software_programs"][i]["params"] = []
 
     d.setdefault("external_reference", [])
     d.setdefault("source_product_external", [])
     d.setdefault("source_product_internal", [])
+    d.setdefault("proc_sw", False)
     d.setdefault("file_area_obs_supplemental", False)
 
     if args.csv:
@@ -93,7 +95,7 @@ def main():
     # Sort GeoTIFF file
     gdal_tif = args.input.with_suffix(".tif")
     lbl_tif = args.output.with_suffix(".tif")
-    if gdal_tif.exists():
+    if not lbl_tif.exists() and gdal_tif.exists():
         gdal_tif.rename(lbl_tif)
 
     d["moddate"] = date.today().isoformat()

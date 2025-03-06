@@ -133,7 +133,7 @@
           <proc:description>${proc_desc}</proc:description>
           <proc:process_owner_name>${proc_owner}</proc:process_owner_name>
           <proc:process_owner_institution_name>${proc_inst}</proc:process_owner_institution_name>
-          <proc:Software>
+          <proc:Software py:if="proc_sw">
             <proc:name>${proc_sw}</proc:name>
             <proc:software_version_id>${proc_sw_version}</proc:software_version_id>
             <proc:software_availability>${proc_sw_avail}</proc:software_availability>
