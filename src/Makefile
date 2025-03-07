@@ -1,9 +1,9 @@
 VALIDATE = validate
 CATALOG = catalog23.xml
-COLLECTIONS = data_derived document browse
+COLLECTIONS = data_derived document
 COLLECTIONSXML = $(foreach name, $(COLLECTIONS), $(name)/collection_$(name).xml)
 
-.PHONY: all db collections bundle clean realclean clean collections
+.PHONY: all collections bundle clean realclean cleancollections
 
 all: collections bundle
 
@@ -12,8 +12,10 @@ collections:
 	$(foreach name, $(COLLECTIONS), $(MAKE) -C $(name);)
 
 
-bundle:
-	labelmaker -v bundle -c labelmaker_b.yml -t labelmaker_b_template.xml $(COLLECTIONSXML)
+bundle.xml: labelmaker_b.yml labelmaker_b_template.xml $(COLLECTIONSXML)
+	labelmaker -v bundle -c $< -t $(wordlist 2, $(words $^), $^)
+
+bundle: bundle.xml
 
 validate:
 	$(VALIDATE) --skip-context-validation --catalog $(CATALOG) --target bundle.xml
@@ -25,4 +27,3 @@ cleancollections:
 	$(foreach name, $(COLLECTIONS), $(MAKE) -C $(name) realclean;)
 
 realclean: clean cleancollections
-	rm -rf $(DBFILE)

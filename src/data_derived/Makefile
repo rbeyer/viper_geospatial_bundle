@@ -2,18 +2,22 @@
 
 VALIDATE = validate
 CATALOG = ../catalog23.xml
-DIRS = depth_to_ice lroc_orthoimages persistently_shadowed_regions sfs_terrain temperature_max
+LABELMAKER_TEMPLATE = ../labelmaker_c_template.xml
+DIRS = depth_to_ice lroc_orthoimages sfs_terrain temperature_max
+LABELS = $(addsuffix /*.xml, $(DIRS))
 
-.PHONY: all pano collection clean realclean
+.PHONY: all collection clean realclean
 
 all: dirs collection
 
 dirs:
 	$(foreach name, $(DIRS), $(MAKE) -C $(name);)
 
-collection:
-	labelmaker -v collection -c labelmaker_c.yml -t labelmaker_c_template.xml $(addsuffix /*.xml, $(DIRS))
+collection_data_derived.xml collection_data_derived.csv: labelmaker_c.yml $(LABELMAKER_TEMPLATE) $(LABELS)
+	labelmaker -v collection -c $< -t $(wordlist 2, $(words $^), $^)
 
+collection: collection_data_derived.xml collection_data_derived.csv
+	
 validate:
 	$(VALIDATE) --skip-context-validation --catalog $(CATALOG) --target collection_data_derived.xml
 

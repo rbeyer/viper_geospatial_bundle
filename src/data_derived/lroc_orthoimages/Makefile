@@ -17,7 +17,7 @@ ORTHO_PATHS = $(ORTHO_SRC_DIR)/M108993634RE.map.tif $(ORTHO_SRC_DIR)/M1101075756
 .PHONY: all 
 XML_PATHS = $(addsuffix -ortho.xml, $(subst COG-,, $(basename $(wildcard COG-*.tif))))
 
-%-ortho.xml: COG-%.tif
+%-ortho.xml %-ortho.tif: COG-%.tif $(MAP_LABEL) $(MAP_TEMP) ortho.yml
 	gdal_translate -of PDS4 $< $(CREATIONOPTS) $(addsuffix _gdal.xml, $(notdir $(basename $<)))
 	$(MAP_LABEL) -t $(MAP_TEMP) -c lroc_list.csv -y ortho.yml $(addsuffix _gdal.xml, $(notdir $(basename $<)))
 

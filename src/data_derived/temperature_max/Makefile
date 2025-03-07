@@ -8,6 +8,7 @@ CREATIONOPTS = -co IMAGE_FORMAT=GEOTIFF
 
 TMAX = /Users/rbeyer/projects/viper/viper-maps/temperature_max/viper_tmax.tif
 TMAXLBL = viper_tmax.xml
+TMAXTIF = $(addsuffix .tif, $(basename $(TMAXLBL)))
 TMAXGDAL = $(addsuffix _gdal.xml, $(basename $(TMAXLBL)))
 TMAXYML = $(addsuffix .yml, $(basename $(TMAXLBL)))
 
@@ -15,9 +16,11 @@ TMAXYML = $(addsuffix .yml, $(basename $(TMAXLBL)))
 
 all: tmax
 
-tmax:
+$(TMAXLBL) $(TMAXTIF): $(TMAX) $(MAP_TEMP) $(TMAXYML)
 	gdal_translate -of PDS4 $(TMAX) $(CREATIONOPTS) $(TMAXGDAL)
 	$(MAP_LABEL) -t $(MAP_TEMP) -o $(TMAXLBL) -y $(TMAXYML) $(TMAXGDAL)
+
+tmax: $(TMAXLBL) $(TMAXTIF)
 
 validate:
 	# $(VALIDATE) --skip-context-validation --target *.xml
