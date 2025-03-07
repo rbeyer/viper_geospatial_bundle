@@ -6,8 +6,9 @@ other information, and then writes a more specfic label.
 import argparse
 from datetime import date, datetime, timezone
 from pathlib import Path
-from xml.etree import ElementTree as ET
+import re
 import sys
+from xml.etree import ElementTree as ET
 
 import pandas as pd
 import yaml
@@ -39,7 +40,7 @@ def arg_parser():
 def get_lv(path, product_id):
     df = pd.read_csv(path, names=["reference_type", "lidvid"])
     row = df[df["lidvid"].str.contains(product_id.lower())]
-    return row["lidvid"].get(0)
+    return row["lidvid"].item()
 
 
 def main():
@@ -69,7 +70,16 @@ def main():
     if args.csv:
         # This is the trigger to assume that this is a label for a VIPER LROC Orthoimage,
         # which requires a little different handling.
-        lroc_lidvid = get_lv(args.csv, args.input.name.split(".")[0])
+        match = re.search(r"M\d+[RL]E", args.input.name, flags=re.I)
+        if match:
+            pid = match.group(0)
+        else:
+            parser.error(
+                f"A PDS3 LROC Product ID could not be extracted from {args.input.name}"
+            )
+
+        # lroc_lidvid = get_lv(args.csv, args.input.name.split(".")[0])
+        lroc_lidvid = get_lv(args.csv, pid)
         lroc_name = lroc_lidvid.split("::")[0].split(":")[-1]
         lid = lroc_name + "-ortho"
         args.output = Path(f"{lid}.xml")
