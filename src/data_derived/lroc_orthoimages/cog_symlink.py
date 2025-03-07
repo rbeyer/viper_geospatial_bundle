@@ -28,7 +28,8 @@ def main():
         pid = p.stem.split(".")[0]
         cogsym_path = Path(f"COG-nac.{pid.lower()}.tif")
 
-        cogsym_path.symlink_to(p)
+        if not cogsym_path.exists():
+            cogsym_path.symlink_to(p)
 
 
 if __name__ == "__main__":
