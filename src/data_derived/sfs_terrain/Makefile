@@ -75,11 +75,11 @@ all: dem count heighte hs mask slope weight maxlit
 
 dem:
 	gdal_translate -of PDS4 $(SFS) $(CREATIONOPTS) $(SFSGDAL)
-	$(MAP_LABEL) -t $(MAP_TEMP) -o $(SFSLBL) -c viper_sfs_images.csv -y $(SFSYML) $(SFSGDAL)
+	$(MAP_LABEL) -t $(MAP_TEMP) -o $(SFSLBL) -y $(SFSYML) $(SFSGDAL)
 
 count:
 	gdal_translate -of PDS4 $(COUNT) $(CREATIONOPTS) $(COUNTGDAL)
-	$(MAP_LABEL) -t $(MAP_TEMP) -o $(COUNTLBL) -c viper_ortho_images.csv -y $(COUNTYML) $(COUNTGDAL)
+	$(MAP_LABEL) -t $(MAP_TEMP) -o $(COUNTLBL) -y $(COUNTYML) $(COUNTGDAL)
 
 heighte:
 	gdal_translate -of PDS4 $(HEIGHTE) $(CREATIONOPTS) $(HEIGHTEGDAL)
