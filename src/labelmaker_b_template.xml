@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1N00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+
+<Product_Bundle xmlns="http://pds.nasa.gov/pds4/pds/v1"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:py="http://genshi.edgewall.org/"
+xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1N00.xsd">
+  <Identification_Area>
+    <logical_identifier>${bundle_lid}</logical_identifier>
+    <version_id>${vid}</version_id>
+    <title>${title}</title>
+    <information_model_version>1.23.0.0</information_model_version>
+    <product_class>Product_Bundle</product_class>
+    <Citation_Information>
+      <author_list>${authors}</author_list>
+      <publication_year>${pub_year}</publication_year>
+      <doi py:if="doi">${doi}</doi>
+      <description>${title}</description>
+    </Citation_Information>
+    <Modification_History>
+      <Modification_Detail py:for="detail in modification_details">
+        <modification_date>${detail.date}</modification_date>
+        <version_id>${detail.version}</version_id>
+        <description>${detail.description}</description>
+      </Modification_Detail>
+    </Modification_History>
+  </Identification_Area>
+  <Context_Area>
+    <Time_Coordinates>
+      <start_date_time py:if="start_date_time is None" xsi:nil="true" nilReason="inapplicable" />
+      <start_date_time py:if="start_date_time is not None">${start_date_time}</start_date_time>
+      <stop_date_time py:if="stop_date_time is None" xsi:nil="true" nilReason="inapplicable" />
+      <stop_date_time py:if="stop_date_time is not None">${stop_date_time}</stop_date_time>
+    </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose py:for="purpose in purposes">${purpose}</purpose>
+      <processing_level py:for="pl in processing_levels">${pl}</processing_level>
+    </Primary_Result_Summary>
+    <Investigation_Area>
+      <name>${investigation_name}</name>
+      <type>${investigation_type}</type>
+      <Internal_Reference>
+        <lid_reference>${investigation_lid}</lid_reference>
+        <reference_type>bundle_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <Observing_System_Component py:if="host_name is not None">
+        <name>${host_name}</name>
+        <type>Host</type>
+        <Internal_Reference>
+          <lid_reference>${host_lid}</lid_reference>
+          <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component py:for="inst_name, inst_lid in instruments.items()">
+        <name>${inst_name}</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>${inst_lid}</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>${target_name}</name>
+      <type>${target_type}</type>
+      <Internal_Reference>
+        <lid_reference>${target_lid}</lid_reference>
+        <reference_type>bundle_to_target</reference_type>
+      </Internal_Reference>
+    </Target_Identification>
+  </Context_Area>
+  <Bundle>
+    <bundle_type>Archive</bundle_type>
+  </Bundle>
+  <File_Area_Text py:if="readme">
+    <File>
+      <file_name>${readme.file}</file_name>
+      <local_identifier>README.FILE</local_identifier>
+      <creation_date_time>${readme.creation_datetime}</creation_date_time>
+      <file_size unit="byte">${readme.bytes}</file_size>
+      <md5_checksum>${readme.checksum}</md5_checksum>
+      <comment>Introduction to the bundle</comment>
+    </File>
+    <Stream_Text>
+      <name>${title}</name>
+      <local_identifier>BUNDLE.DESCRIPTION</local_identifier>
+      <offset unit="byte">${readme.offset}</offset>
+      <parsing_standard_id>${readme.parsing_standard}</parsing_standard_id>
+      <description>${readme.description}</description>
+      <record_delimiter>${readme.record_delimiter}</record_delimiter>
+    </Stream_Text>
+  </File_Area_Text>
+  <Bundle_Member_Entry py:for="collection in collections">
+    <lidvid_reference>${collection.lid}</lidvid_reference>
+    <member_status>Primary</member_status>
+    <reference_type>${collection.type}</reference_type>
+  </Bundle_Member_Entry>
+</Product_Bundle>

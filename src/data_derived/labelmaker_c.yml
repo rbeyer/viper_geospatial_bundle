@@ -1,0 +1,28 @@
+# This is a YAML configuration file for 'labelmaker collection'.
+
+# The element after the last colon in collection_lid below determines the NAME in the output 
+# filenames, which will be collection_NAME.csv and collection_NAME.xml
+collection_lid: "urn:nasa:pds:viper_geospatial:data_derived"
+title: VIPER Geospatial Derived Data Collection
+authors: Ross Beyer and David Lees
+pub_year: 2025
+doi: null  #  TBD
+modification_details:
+  - version: 999.1
+    date: 2025-03-06
+    description: >-
+      Dumb information model forces this to be a 'valid' version
+      instead of 0.1 for testing, which should be allowed.  This is
+      the first draft.  All version 999 modifications will be removed
+      before PDS release 1.0.
+collection_type: Data
+
+# The following elements are checked against the labels in the collection:
+investigation_name: VIPER
+investigation_type: Mission
+investigation_lid: "urn:nasa:pds:viper"
+host_name: null
+host_lid: null
+target_name: Moon
+target_type: Satellite
+target_lid: "urn:nasa:pds:context:target:satellite.earth.moon"
