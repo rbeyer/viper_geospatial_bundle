@@ -18,11 +18,18 @@ modification_details:
     instead of 0.1 for testing, which should be allowed.  This is
     the first draft.  All version 999 modifications will be removed
     before PDS release 1.0.
+
+obs_system_desc: This data product was derived from a LROC images and LOLA data.
 obs_system_components:
  - name: Lunar Reconnaissance Orbiter Camera
    type: Instrument
+   lid_ref: urn:nasa:pds:context:instrument:lro.lroc
+   lid_ref_type: is_instrument
  - name: Lunar Orbiter Laser Altimeter
    type: Instrument
+   lid_ref: urn:nasa:pds:context:instrument:lro.lola
+   lid_ref_type: is_instrument
+
 proc_name: Shape-from-Shading
 proc_desc: >-
   This is the processing step that takes as input the LOLA terrain

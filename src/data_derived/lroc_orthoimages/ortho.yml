@@ -1,6 +1,6 @@
 # This is a generic-ish YAML file meant to be operated on by map_label.py -c
 #
-lid: "urn:nasa:pds:viper_geospatial:lroc_orthoimages:"  # Yes, only partial when map_label.py -c is used.
+lid: "urn:nasa:pds:viper_geospatial:data_derived:"  # Yes, only partial when map_label.py -c is used.
 title: VIPER Orthorectified LROC NAC image
 description: >-
   This is a Lunar Reconnaissance Orbiter Camera (LROC) Narrow Angle
@@ -15,9 +15,12 @@ modification_details:
     the first draft.  All version 999 modifications will be removed
     before PDS release 1.0.
 
+obs_system_desc: This data product was derived from an LROC image.
 obs_system_components:
  - name: Lunar Reconnaissance Orbiter Camera
    type: Instrument
+   lid_ref: urn:nasa:pds:context:instrument:lro.lroc
+   lid_ref_type: data_to_investigation
 
 proc_name: Orthorectification
 proc_desc: This process map-projects the bundle-adjusted LROC NAC image onto the SfS terrain.

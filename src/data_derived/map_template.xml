@@ -48,9 +48,15 @@
       </Internal_Reference>
     </Investigation_Area>
     <Observing_System>
+      <description py:if="obs_system_desc">${obs_system_desc}</description>
       <Observing_System_Component py:for="comp in obs_system_components">
         <name>${comp.name}</name>
         <type>${comp.type}</type>
+        <description py:if="comp.desc">${comp.desc}</description>
+        <Internal_Reference py:if="comp.lid_ref">
+          <lid_reference>${comp.lid_ref}</lid_reference>
+          <reference_type>${comp.lid_ref_type}</reference_type>
+        </Internal_Reference>
       </Observing_System_Component>
     </Observing_System>
     <Target_Identification>

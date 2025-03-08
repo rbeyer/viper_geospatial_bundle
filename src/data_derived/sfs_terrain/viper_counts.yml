@@ -14,9 +14,14 @@ modification_details:
     instead of 0.1 for testing, which should be allowed.  This is
     the first draft.  All version 999 modifications will be removed
     before PDS release 1.0.
+
+obs_system_desc: This data product was derived from orthorectified LROC images.
 obs_system_components:
  - name: Lunar Reconnaissance Orbiter Camera
    type: Instrument
+   lid_ref: urn:nasa:pds:context:instrument:lro.lroc
+   lid_ref_type: is_instrument
+
 proc_name: Create Count Map
 proc_desc: >-
   This is the processing step that takes as input the VIPER LROC

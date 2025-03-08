@@ -54,6 +54,16 @@ def main():
     d = yaml.safe_load(args.yaml.read_text())
 
     # Add some empty entries so I don't have to remember to include them in every .yml file
+
+    d.setdefault("obs_system_desc", False)
+
+    if "obs_system_components" in d:
+        for i, c in enumerate(d["obs_system_components"]):
+            if "desc" not in c:
+                d["obs_system_components"][i]["desc"] = False
+            if "lid_ref" not in c:
+                d["obs_system_components"][i]["lid_ref"] = False
+
     if "software_programs" in d:
         for i, p in enumerate(d["software_programs"]):
             if "desc" not in p:
