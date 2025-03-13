@@ -32,11 +32,11 @@ obs_system_components:
  - name: Lunar Reconnaissance Orbiter Camera
    type: Instrument
    lid_ref: urn:nasa:pds:context:instrument:lro.lroc
-   lid_ref_type: data_to_investigation
+   lid_ref_type: is_instrument
  - name: Lunar Orbiter Laser Altimeter
    type: Instrument
    lid_ref: urn:nasa:pds:context:instrument:lro.lola
-   lid_ref_type: data_to_investigation
+   lid_ref_type: is_instrument
 
 proc_name: Depth to Paleo Ice Stability
 proc_desc: >-

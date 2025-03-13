@@ -20,7 +20,7 @@ obs_system_components:
  - name: Lunar Reconnaissance Orbiter Camera
    type: Instrument
    lid_ref: urn:nasa:pds:context:instrument:lro.lroc
-   lid_ref_type: data_to_investigation
+   lid_ref_type: is_instrument
 
 proc_name: Orthorectification
 proc_desc: This process map-projects the bundle-adjusted LROC NAC image onto the SfS terrain.
