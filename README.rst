@@ -12,8 +12,8 @@ and contains a Makefile and a few files for the vipersci labelmaker program
 that will help build the bundle label.
 
 If the bundle and collection directories are "clean" then just
-typing "make" at the top level here should build up all of the
-products, collection, and bundle files.
+typing "make pre" and then "make" at the top level here should build
+up all of the products, collection, and bundle files.
 
 And then "make install" should create a bundle/ directory with files ready to be delivered to PDS.
 
