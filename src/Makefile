@@ -7,10 +7,13 @@ COLLECTIONSXML = $(foreach name, $(COLLECTIONS), $(name)/collection_$(name).xml)
 
 all: collections bundle
 
+pre:
+	$(foreach name, $(COLLECTIONS), $(MAKE) -C $(name) pre;)
 
-collections:
+collections: $(COLLECTIONSXML)
+
+$(COLLECTIONSXML):
 	$(foreach name, $(COLLECTIONS), $(MAKE) -C $(name);)
-
 
 bundle.xml: labelmaker_b.yml labelmaker_b_template.xml $(COLLECTIONSXML)
 	labelmaker -v bundle -c $< -t $(wordlist 2, $(words $^), $^)

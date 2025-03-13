@@ -10,6 +10,11 @@ DOCS = geospatial_ug
 
 all: collection
 
+pre:
+	@echo Is the $(DOCS).pdf file fresh?
+	@ls -la $(DOCS).pdf
+
+
 collection_document.xml collection_document.csv: labelmaker_c.yml geospatial_ug.xml
 	labelmaker -v collection -c $< -t $(LABELMAKER_TEMPLATE) $(addsuffix .xml, $(DOCS))
 

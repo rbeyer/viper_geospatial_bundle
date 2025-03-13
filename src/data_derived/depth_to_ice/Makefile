@@ -22,6 +22,9 @@ PDICEYML = $(addsuffix .yml, $(basename $(PDICELBL)))
 
 all: dice pdice
 
+pre:
+	@echo No pre target for depth_to_ice.
+
 $(DICELBL) $(DICETIF): $(DICE) $(DICEYML) $(MAP_TEMP)
 	gdal_translate -of PDS4 $(DICE) $(CREATIONOPTS) $(DICEGDAL)
 	$(MAP_LABEL) -t $(MAP_TEMP) -o $(DICELBL) -y $(DICEYML) $(DICEGDAL)
@@ -32,7 +35,7 @@ $(PDICELBL) $(PDICETIF): $(PDICE) $(PDICEYML) $(MAP_TEMP)
 	gdal_translate -of PDS4 $(PDICE) $(CREATIONOPTS) $(PDICEGDAL)
 	$(MAP_LABEL) -t $(MAP_TEMP) -o $(PDICELBL) -y $(PDICEYML) $(PDICEGDAL)
 
-dice: $(PDICELBL) $(PDICETIF)
+pdice: $(PDICELBL) $(PDICETIF)
 
 validate:
 	# $(VALIDATE) --skip-context-validation --target *.xml
@@ -40,6 +43,6 @@ validate:
 
 clean:
 	rm -rf viper_*.xml
+	rm -rf viper_*.tif
 
 realclean: clean
-	rm -rf viper_*.tif

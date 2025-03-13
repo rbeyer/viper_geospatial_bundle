@@ -73,6 +73,9 @@ CREATIONOPTS = -co IMAGE_FORMAT=GEOTIFF
 
 all: dem count heighte hs mask slope weight maxlit
 
+pre:
+	@echo No pre target for sfs_terrain.
+
 dem:
 	gdal_translate -of PDS4 $(SFS) $(CREATIONOPTS) $(SFSGDAL)
 	$(MAP_LABEL) -t $(MAP_TEMP) -o $(SFSLBL) -y $(SFSYML) $(SFSGDAL)

@@ -25,6 +25,8 @@ XML_PATHS = $(addsuffix -ortho.xml, $(subst COG-,, $(basename $(wildcard COG-*.t
 # I can't figure it out.
 all: orthos
 
+pre: symlinks
+
 symlinks:
 	./cog_symlink.py $(ORTHO_PATHS)
 

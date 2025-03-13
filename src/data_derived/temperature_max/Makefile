@@ -16,6 +16,9 @@ TMAXYML = $(addsuffix .yml, $(basename $(TMAXLBL)))
 
 all: tmax
 
+pre:
+	@echo No pre target for temperature_max.
+
 $(TMAXLBL) $(TMAXTIF): $(TMAX) $(MAP_TEMP) $(TMAXYML)
 	gdal_translate -of PDS4 $(TMAX) $(CREATIONOPTS) $(TMAXGDAL)
 	$(MAP_LABEL) -t $(MAP_TEMP) -o $(TMAXLBL) -y $(TMAXYML) $(TMAXGDAL)
