@@ -2,12 +2,24 @@
 
 bundle_lid: "urn:nasa:pds:viper_geospatial"
 title: "VIPER Geospatial Products Bundle"
-authors: "Ross Beyer and David Lees"
 pub_year: 2025
 doi: null  #  TBD
+authors:
+  - display_full_name: Ross A. Beyer
+    given_name: Ross
+    family_name: Beyer
+    orcid: http://orcid.org/0000-0003-4503-3335
+    sequence: 1
+    affiliations:
+    - name: SETI Institute
+      rorid: https://ror.org/02dxgk712
+      sequence: 1
+    - name: NASA Ames Research Center
+      rorid: https://ror.org/02acart68
+      sequence: 2
 modification_details:
-  - version: 999.91
-    date: "2025-03-07"
+  - version: 999.1
+    date: "2025-03-13"
     description: >-
       Dumb information model forces this to be a 'valid' version
       instead of 0.1 for testing, which should be allowed.  This is

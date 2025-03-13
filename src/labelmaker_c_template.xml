@@ -12,10 +12,23 @@ xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pd
     <information_model_version>1.23.0.0</information_model_version>
     <product_class>Product_Collection</product_class>
     <Citation_Information>
-      <author_list>${authors}</author_list>
       <publication_year>${pub_year}</publication_year>
       <doi py:if="doi">${doi}</doi>
       <description>${title}</description>
+      <List_Author>
+        <Person py:for="person in authors">
+          <display_full_name>${person.display_full_name}</display_full_name>
+          <given_name>${person.given_name}</given_name>
+          <family_name>${person.family_name}</family_name>
+          <person_orcid>${person.orcid}</person_orcid>
+          <sequence_number>${person.sequence}</sequence_number>
+          <Affiliation py:for="aff in person.affiliations">
+            <organization_name>${aff.name}</organization_name>
+            <organization_rorid>${aff.rorid}</organization_rorid>
+            <sequence_number>${aff.sequence}</sequence_number>
+          </Affiliation>
+        </Person>
+      </List_Author>
     </Citation_Information>
     <Modification_History>
       <Modification_Detail py:for="detail in modification_details">
