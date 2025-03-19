@@ -5,7 +5,7 @@
 collection_lid: "urn:nasa:pds:viper_geospatial:document"
 title: VIPER Geospatial Document Collection
 pub_year: 2025
-doi: null  #  TBD
+doi: http:/.doi.org/10.17189/pdzh-ax03
 authors:
   - display_full_name: Ross A. Beyer
     given_name: Ross
@@ -27,6 +27,11 @@ modification_details:
       instead of 0.1 for testing, which should be allowed.  This is
       the first draft.  All version 999 modifications will be removed
       before PDS release 1.0.
+  - version: 999.2
+    date: 2025-0?-??
+    description: >-
+      Added Bundle DOI as the DOI for the Citation of *this* Collection which seems odd,
+      but better than minting DOIs for each Collection or leaving it off, I guess?
 collection_type: Document
 
 # The following elements are checked against the labels in the collection:

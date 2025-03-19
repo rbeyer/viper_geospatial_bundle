@@ -14,13 +14,61 @@
     <product_class>Product_Document</product_class>
     <Citation_Information>
       <publication_year>2025</publication_year>
+      <doi>http://doi.org/10.17189/q876-ah39</doi>
       <description>VIPER Geospatial Products User Guide</description>
+      <List_Author>
+        <Person>
+          <display_full_name>Ross A. Beyer</display_full_name>
+          <given_name>Ross</given_name>
+          <family_name>Beyer</family_name>
+          <person_orcid>http://orcid.org/0000-0003-4503-3335</person_orcid>
+          <sequence_number>1</sequence_number>
+          <Affiliation>
+            <organization_name>SETI Institute</organization_name>
+            <organization_rorid>https://ror.org/02dxgk712</organization_rorid>
+            <sequence_number>1</sequence_number>
+          </Affiliation><Affiliation>
+            <organization_name>NASA Ames Research Center</organization_name>
+            <organization_rorid>https://ror.org/02acart68</organization_rorid>
+            <sequence_number>2</sequence_number>
+          </Affiliation>
+        </Person>
+        <Person>
+          <display_full_name>David Lees</display_full_name>
+          <given_name>David</given_name>
+          <family_name>Lees</family_name>
+          <person_orcid>http://orcid.org/0000-0000-0000-0000</person_orcid>
+          <sequence_number>2</sequence_number>
+          <Affiliation>
+            <organization_name>NASA Ames Research Center</organization_name>
+            <organization_rorid>https://ror.org/02acart68</organization_rorid>
+            <sequence_number>1</sequence_number>
+          </Affiliation>
+        </Person>
+        <Person>
+          <display_full_name>Anthony Colaprete</display_full_name>
+          <given_name>Anthony</given_name>
+          <family_name>Colaprete</family_name>
+          <person_orcid>http://orcid.org/0000-0002-5847-2241</person_orcid>
+          <sequence_number>3</sequence_number>
+          <Affiliation>
+            <organization_name>NASA Ames Research Center</organization_name>
+            <organization_rorid>https://ror.org/02acart68</organization_rorid>
+            <sequence_number>1</sequence_number>
+          </Affiliation>
+        </Person>
+      </List_Author>
     </Citation_Information>
     <Modification_History>
       <Modification_Detail>
         <modification_date>2025-03-13</modification_date>
         <version_id>999.1</version_id>
         <description>Dumb information model forces this to be a 'valid' version instead of 0.1 for testing, which should be allowed.  This is the first draft.  All version 999 modifications will be removed before PDS release 1.0.</description>
+      </Modification_Detail>
+      <Modification_Detail>
+        <modification_date>2025-0?-??</modification_date>
+        <version_id>999.2</version_id>
+        <description>Added new document DOI and added David and Tony as co-authors here.</description>
       </Modification_Detail>
     </Modification_History>
   </Identification_Area>
