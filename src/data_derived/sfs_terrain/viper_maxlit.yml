@@ -16,6 +16,11 @@ modification_details:
     instead of 0.1 for testing, which should be allowed.  This is
     the first draft.  All version 999 modifications will be removed
     before PDS release 1.0.
+- version: 999.1
+  date: 2025-03-26
+  description: Added a Source_Product_Internal for the viper_ortho_images.csv
+
+
 
 obs_system_desc: This data product was derived from LROC orthoimages.
 obs_system_components:
@@ -57,11 +62,9 @@ external_reference:
   ref_text: "Oleg Alexandrov, et al. (2023). NeoGeographyToolkit/StereoPipeline: ASP 3.2.0 (3.2.0). Zenodo."
   desc: This is the DOI for the version of the NASA ASP software used to produce this product.
 
-# This is a problem, seems like this should also point to the ortho_image list.
-# file_area_obs_supplemental: True
-# faos_file_name: viper_ortho_images.csv
-# faos_table_name: VIPER LROC NAC Orthoimage Source LIDVIDs
-# faos_table_desc: >-
-#   This table is a list of the product lidvids of all VIPER LROC NAC
-#   Orthoimage products used to create this count map.
-# faos_lidvid_desc: VIPER LROC NAC Orthoimage LIDVID
+source_product_internal:
+- lidvid: urn:nasa:pds:viper_geospatial:data_derived:viper_ortho_images::1.0
+  type: data_to_derived_source_product
+  comment: >-
+    This is the listing of the orthorectified VIPER LROC NAC Orthoimage products used
+    to create this mosaic.
