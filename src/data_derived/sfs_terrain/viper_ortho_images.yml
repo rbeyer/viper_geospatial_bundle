@@ -1,0 +1,14 @@
+
+lid: "urn:nasa:pds:viper_geospatial:data_derived:viper_ortho_images"
+title: "Listing of VIPER LROC NAC Orthoimages used for maxlit and counts products." 
+description: >-
+  This listing of VIPER LROC NAC Orthoimages is used for the 
+  Maximally-illuminated mosaic and Count map.  
+modification_details: 
+- version: 999.1
+  date: 2025-03-25
+  description: >-
+    Dumb information model forces this to be a 'valid' version
+    instead of 0.1 for testing, which should be allowed.  This is
+    the first draft.  All version 999 modifications will be removed
+    before PDS release 1.0.

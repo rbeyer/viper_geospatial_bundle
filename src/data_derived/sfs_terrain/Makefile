@@ -57,7 +57,9 @@ MAXLITGDAL = $(addsuffix _gdal.xml, $(basename $(MAXLITLBL)))
 MAXLITYML = $(addsuffix .yml, $(basename $(MAXLITLBL)))
 MAXLITTIFF = $(addsuffix .tif, $(basename $(MAXLITLBL)))
 
-LABELS = $(SFSLBL) $(COUNTLBL) $(HEIGHTELBL) $(HILLLBL) $(MASKLBL) $(SLOPELBL) $(WEIGHTLBL) $(MAXLITLBL)
+IMGLISTLBL = viper_ortho_images.xml
+
+LABELS = $(SFSLBL) $(COUNTLBL) $(HEIGHTELBL) $(HILLLBL) $(MASKLBL) $(SLOPELBL) $(WEIGHTLBL) $(MAXLITLBL) $(IMGLISTLBL)
 TOCLEAN = $(SFSGDAL) $(SFSTIFF) \
 	  $(COUNTGDAL) $(COUNTTIFF) \
 	  $(HEIGHTEGDAL) $(HEIGHTETIFF) \
@@ -107,6 +109,11 @@ weight:
 maxlit:
 	gdal_translate -of PDS4 $(MAXLIT) $(CREATIONOPTS) $(MAXLITGDAL)
 	$(MAP_LABEL) -t $(MAP_TEMP) -o $(MAXLITLBL) -y $(MAXLITYML) $(MAXLITGDAL)
+
+ortholist: $(IMGLISTLBL)
+
+$(IMGLISTLBL):
+	./viper_ortho_images.py -c viper_ortho_images.csv -o $@ -t viper_ortho_images_template.xml -y viper_ortho_images.yml
 
 validate:
 	# $(VALIDATE) --skip-context-validation --target $(LABELS)
