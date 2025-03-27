@@ -1,6 +1,7 @@
 #!/usr/bin/env python
-"""Starts by reading information from a PDS4 label from GDAL, gathers
-other information, and then writes a more specfic label.
+"""
+This program runs gdal_translate to produce a draft XML label and a GeoTIFF,
+and then gathers information, and produces a modified label.
 """
 
 import argparse
@@ -10,6 +11,7 @@ import re
 import sys
 from xml.etree import ElementTree as ET
 
+from osgeo import gdal
 import pandas as pd
 import yaml
 
@@ -29,10 +31,13 @@ def arg_parser():
     )
     parser.add_argument("-o", "--output", type=Path, help="Output XML label file.")
     parser.add_argument(
+        "-p", "--projection", help="A .prj file with a WKT string.", default="viper.prj"
+    )
+    parser.add_argument(
         "-t", "--template", type=Path, help="XML template to use to create the output."
     )
     parser.add_argument("-y", "--yaml", type=Path, help="The YAML file to load.")
-    parser.add_argument("input", type=Path, help="Input XML label written by GDAL.")
+    parser.add_argument("input", type=Path, help="Input GeoTIFF data.")
 
     return parser
 
@@ -47,35 +52,12 @@ def main():
     parser = arg_parser()
     args = parser.parse_args()
 
-    # Read in GDAL XML and trim the broken element.
-    root = ET.fromstring(args.input.read_text().replace("<cart: />", ""))
+    if args.output is None:
+        args.output = args.yaml.with_suffix(".xml")
 
-    # Now read in the YAML to populate the dictionary.
+    # First read in the YAML to gather some introductory data.
     d = yaml.safe_load(args.yaml.read_text())
-
-    # Add some empty entries so I don't have to remember to include them in every .yml file
-
-    d.setdefault("obs_system_desc", False)
-
-    if "obs_system_components" in d:
-        for i, c in enumerate(d["obs_system_components"]):
-            if "desc" not in c:
-                d["obs_system_components"][i]["desc"] = False
-            if "lid_ref" not in c:
-                d["obs_system_components"][i]["lid_ref"] = False
-
-    if "software_programs" in d:
-        for i, p in enumerate(d["software_programs"]):
-            if "desc" not in p:
-                d["software_programs"][i]["desc"] = False
-            if "params" not in p:
-                d["software_programs"][i]["params"] = []
-
-    d.setdefault("external_reference", [])
-    d.setdefault("source_product_external", [])
-    d.setdefault("source_product_internal", [])
-    d.setdefault("proc_sw", False)
-    d.setdefault("file_area_obs_supplemental", False)
+    d["vid"] = vid_max(d["modification_details"])
 
     if args.csv:
         # This is the trigger to assume that this is a label for a VIPER LROC Orthoimage,
@@ -112,15 +94,55 @@ def main():
                 f"The LID ({d['lid']}) does not match the output filename ({args.output.stem})."
             )
 
-    # Sort GeoTIFF file
-    gdal_tif = args.input.with_suffix(".tif")
-    lbl_tif = args.output.with_suffix(".tif")
-    if not lbl_tif.exists() and gdal_tif.exists():
-        gdal_tif.rename(lbl_tif)
+    # Now gdal_translate
+    opts = gdal.TranslateOptions(
+        format="PDS4",
+        creationOptions="IMAGE_FORMAT=GEOTIFF",
+        outputSRS=args.projection,
+    )
+    gdal.Translate(str(args.output), str(args.input), options=opts)
 
-    d["moddate"] = date.today().isoformat()
+    print(args.output)
+
+    # Sort GeoTIFF file
+    lbl_tif = args.output.with_suffix(".tif")
+
+    # Now add some metadata to the TIFF itself.
+    ds = gdal.OpenEx(str(lbl_tif), gdal.OF_RASTER | gdal.OF_UPDATE)
+    md = ds.GetMetadata()
+    md["TIFFTAG_DATETIME"] = date.today().isoformat()
+    md["TIFFTAG_IMAGEDESCRIPTION"] = f"{d['title']}, {d['lid']}::{d['vid']}"
+    ds.SetMetadata(md)
+
+    # Read in GDAL XML and trim the broken element.
+    root = ET.fromstring(args.output.read_text().replace("<cart: />", ""))
+
+    # Add some empty entries so I don't have to remember to include them in every .yml file
+
+    d.setdefault("obs_system_desc", False)
+
+    if "obs_system_components" in d:
+        for i, c in enumerate(d["obs_system_components"]):
+            if "desc" not in c:
+                d["obs_system_components"][i]["desc"] = False
+            if "lid_ref" not in c:
+                d["obs_system_components"][i]["lid_ref"] = False
+
+    if "software_programs" in d:
+        for i, p in enumerate(d["software_programs"]):
+            if "desc" not in p:
+                d["software_programs"][i]["desc"] = False
+            if "params" not in p:
+                d["software_programs"][i]["params"] = []
+
+    d.setdefault("external_reference", [])
+    d.setdefault("source_product_external", [])
+    d.setdefault("source_product_internal", [])
+    d.setdefault("proc_sw", False)
+    d.setdefault("file_area_obs_supplemental", False)
+
+    # d["moddate"] = date.today().isoformat()
     d["file_name"] = lbl_tif
-    d["vid"] = vid_max(d["modification_details"])
 
     # Get things from the GDAL label
     d["west_bounding"] = find_text(root, ".//cart:west_bounding_coordinate")
@@ -171,9 +193,8 @@ def main():
 
     # print(d)
 
+    # This overwrites the output file created by the run of gdal.Translate()
     write_xml(d, args.output, args.template)
-
-    args.input.unlink()
 
 
 if __name__ == "__main__":

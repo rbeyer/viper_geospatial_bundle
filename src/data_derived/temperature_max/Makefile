@@ -2,6 +2,7 @@
 
 MAP_LABEL = ../map_label.py
 MAP_TEMP = ../map_template.xml
+PROJ = ../viper.prj
 VALIDATE = validate
 CATALOG = ../../catalog23.xml
 CREATIONOPTS = -co IMAGE_FORMAT=GEOTIFF
@@ -9,7 +10,6 @@ CREATIONOPTS = -co IMAGE_FORMAT=GEOTIFF
 TMAX = /Users/rbeyer/projects/viper/viper-maps/temperature_max/viper_tmax.tif
 TMAXLBL = viper_tmax.xml
 TMAXTIF = $(addsuffix .tif, $(basename $(TMAXLBL)))
-TMAXGDAL = $(addsuffix _gdal.xml, $(basename $(TMAXLBL)))
 TMAXYML = $(addsuffix .yml, $(basename $(TMAXLBL)))
 
 .PHONY: all clean realclean
@@ -20,8 +20,7 @@ pre:
 	@echo No pre target for temperature_max.
 
 $(TMAXLBL) $(TMAXTIF): $(TMAX) $(MAP_TEMP) $(TMAXYML)
-	gdal_translate -of PDS4 $(TMAX) $(CREATIONOPTS) $(TMAXGDAL)
-	$(MAP_LABEL) -t $(MAP_TEMP) -o $(TMAXLBL) -y $(TMAXYML) $(TMAXGDAL)
+	$(MAP_LABEL) -t $(MAP_TEMP) -p $(PROJ) -o $(TMAXLBL) -y $(TMAXYML) $(TMAX)
 
 tmax: $(TMAXLBL) $(TMAXTIF)
 
