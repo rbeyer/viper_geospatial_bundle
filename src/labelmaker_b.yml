@@ -17,6 +17,45 @@ authors:
     - name: NASA Ames Research Center
       rorid: https://ror.org/02acart68
       sequence: 2
+  - display_full_name: Oleg Alexandrov
+    given_name: Oleg
+    family_name: Alexandrov
+    orcid: https://orcid.org/0000-0001-7567-493X
+    sequence: 2
+    affiliations:
+    - name: NASA Ames Research Center
+      rorid: https://ror.org/02acart68
+      sequence: 1
+  - display_full_name: Matthew Siegler
+    given_name: Matthew
+    family_name: Siegler
+    orcid: https://orcid.org/0000-0002-7940-3931
+    sequence: 3
+    affiliations:
+    - name: University of Hawaiʻi at Manōa
+      rorid: https://ror.org/01wspgy28
+      sequence: 1
+  - display_full_name: José Martinez-Camacho
+    given_name: José
+    family_name: Martinez-Camacho
+    orcid: https://orcid.org/0000-0003-0542-7866
+    sequence: 4
+    affiliations:
+    - name: University of Hawaiʻi at Manōa
+      rorid: https://ror.org/01wspgy28
+      sequence: 1
+  - display_full_name: Mark Shirley
+    given_name: Mark
+    family_name: Shirley
+    orcid: https://orcid.org/0000-0001-8767-1760
+    sequence: 5
+    affiliations:
+    - name: NASA Ames Research Center
+      rorid: https://ror.org/02acart68
+      sequence: 1
+      sequence: 1
+
+
 modification_details:
   - version: 999.1
     date: "2025-03-13"
