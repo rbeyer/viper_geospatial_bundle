@@ -65,7 +65,7 @@ modification_details:
       the first draft.  All version 999 modifications will be removed
       before PDS release 1.0.
   - version: 999.2
-    date: "2025-0?-??"
+    date: "2025-04-21"
     description: >-
       Added new bundle DOI.
 
