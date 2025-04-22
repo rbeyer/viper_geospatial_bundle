@@ -21,6 +21,11 @@ modification_details:
     instead of 0.1 for testing, which should be allowed.  This is
     the first draft.  All version 999 modifications will be removed
     before PDS release 1.0.
+- version: 999.2
+  date: 2025-04-21
+  description: >-
+    Updated VIPER Site Analysis paper to submitted and added product information
+    to the GeoTIFF TIFFTAGs.
 
 obs_system_desc: >-
      This data product was derived from a shape-from-shading terrain
@@ -44,8 +49,8 @@ proc_owner: Matt Siegler and Jose Martinez-Camacho
 proc_inst: Planetary Science Institute and Southern Methodist University
 
 external_reference:
-- doi: 10.3847/PSJ/??????
-  ref_text: Beyer et al. (to be submitted), VIPER Site Analysis, PSJ
+- doi: 10.3847/PSJ/submitted
+  ref_text: Beyer et al. (submitted), VIPER Site Analysis, PSJ
   desc: This paper provides a description of the methods and process used to produce this map.
 - doi: 10.1029/2021JE006829
   ref_text: >-

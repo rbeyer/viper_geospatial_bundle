@@ -21,6 +21,10 @@ modification_details:
     instead of 0.1 for testing, which should be allowed.  This is
     the first draft.  All version 999 modifications will be removed
     before PDS release 1.0.
+- version: 999.2
+  date: 2025-04-21
+  description: >-
+    Added product information to the GeoTIFF TIFFTAGs.
 
 obs_system_desc: >-
      This data product was derived from a shape-from-shading terrain
