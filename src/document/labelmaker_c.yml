@@ -5,7 +5,7 @@
 collection_lid: "urn:nasa:pds:viper_geospatial:document"
 title: VIPER Geospatial Document Collection
 pub_year: 2025
-doi: http:/.doi.org/10.17189/pdzh-ax03
+doi: 10.17189/pdzh-ax03
 authors:
   - display_full_name: Ross A. Beyer
     given_name: Ross
