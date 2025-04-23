@@ -67,7 +67,7 @@ CREATIONOPTS = -co IMAGE_FORMAT=GEOTIFF
 
 .PHONY: all validate
 
-all: dem count heighte hs mask slope weight maxlit
+all: dem count heighte hs mask slope weight maxlit ortholist
 
 pre:
 	@echo No pre target for sfs_terrain.
