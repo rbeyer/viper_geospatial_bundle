@@ -9,9 +9,9 @@ CREATIONOPTS = -co IMAGE_FORMAT=GEOTIFF
 
 ORTHO = /Users/rbeyer/projects/viper/viper-maps/lroc-nac-maps/M108993634RE.map.tif
 
-ORTHO_SRC_DIR = /Users/rbeyer/projects/viper/viper-maps/lroc-nac-maps/
-# ORTHO_PATHS = $(wildcard $(ORTHO_SRC_DIR)/*tif)
-ORTHO_PATHS = $(ORTHO_SRC_DIR)/M108993634RE.map.tif $(ORTHO_SRC_DIR)/M1101075756LE.map.tif
+ORTHO_SRC_DIR = /Users/rbeyer/projects/viper/viper-maps/lroc-nac-maps
+# ORTHO_PATHS = $(ORTHO_SRC_DIR)/M108993634RE.map.tif $(ORTHO_SRC_DIR)/M1101075756LE.map.tif
+ORTHO_PATHS = $(wildcard $(ORTHO_SRC_DIR)/M*.map.tif)
 
 
 .PHONY: all 
