@@ -32,6 +32,29 @@ Unreleased
 ----------
 
 
+999.2 (2025-04-25)
+------------------
+This is the version that was submitted for PDS review.
+
+The known issues are: 
+
+- The Users Guide is not PDF1a compliant 
+- The Beyer et al. VIPER Site Analysis paper is currently only "submitted" and does not have a proper DOI.
+
+Added
+^^^^^
+- Added the PSR map to the bundle.
+- Added DOIs for the UG and bundle provided by Trent.
+- Added authors to the bundle and UG.
+- LIDVID, title, and date now inserted into the TIFFTAGS for the GeoTIFFs.
+
+Changed
+^^^^^^^
+- Made the viper_ortho_list a "full" product.
+- Made the viper_ortho_list a Source_Product_Internal.
+
+
+
 999.1 (2025-03-13)
 ------------------
 
